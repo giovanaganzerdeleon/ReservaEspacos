@@ -1,15 +1,12 @@
-package com.projeto.model;
 
+package com.projeto.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "reserva")
@@ -19,40 +16,65 @@ public class Reserva {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-       @Column(name = "data", nullable = false)
+    @Column(name = "data", nullable = false)
     private LocalDate data;
 
-        @Column(name = "horario", nullable = false)
-    private LocalTime horario;
+    @Column(name = "horario_inicio", nullable = false)
+    private LocalTime horarioInicio;
 
-       @Column(name = "tipo", nullable = false, length = 50)
+    @Column(name = "horario_fim", nullable = false)
+    private LocalTime horarioFim;
+
+    @Column(name = "tipo", nullable = false, length = 50)
     private String tipo;
 
-   
-    @Column(name = "local", nullable = false, length = 100)
-    private String local;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false, length = 20)
+    private StatusReserva status = StatusReserva.CONFIRMADA;
 
-    @Column(name = "disponibilidade", nullable = false)
-    private boolean disponibilidade = true;
+    // Relacionamento com Usuario
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
 
-    // =========================================================
-    // CONSTRUTORES
-    // =========================================================
+    // Relacionamento com Salas
+    @ManyToOne
+    @JoinColumn(name = "sala_id", nullable = true)
+    private Salas sala;
+
+    // Relacionamento com ReservaEquipamento
+    @OneToMany(
+        mappedBy = "reserva",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    private List<ReservaEquipamento> equipamentos = new ArrayList<>();
+    public void adicionarEquipamento(ReservaEquipamento item) {
+    equipamentos.add(item);
+    item.setReserva(this);
+}
 
     public Reserva() {
     }
 
-    public Reserva(LocalDate data, LocalTime horario, String tipo, String local, boolean disponibilidade) {
+    public Reserva(
+            LocalDate data,
+            LocalTime horarioInicio,
+            LocalTime horarioFim,
+            String tipo,
+            Usuario usuario,
+            Salas sala) {
+
         this.data = data;
-        this.horario = horario;
+        this.horarioInicio = horarioInicio;
+        this.horarioFim = horarioFim;
         this.tipo = tipo;
-        this.local = local;
-        this.disponibilidade = disponibilidade;
+        this.usuario = usuario;
+        this.sala = sala;
+        this.status = StatusReserva.CONFIRMADA;
     }
 
-    // =========================================================
     // GETTERS E SETTERS
-    // =========================================================
 
     public Long getId() {
         return id;
@@ -70,12 +92,20 @@ public class Reserva {
         this.data = data;
     }
 
-    public LocalTime getHorario() {
-        return horario;
+    public LocalTime getHorarioInicio() {
+        return horarioInicio;
     }
 
-    public void setHorario(LocalTime horario) {
-        this.horario = horario;
+    public void setHorarioInicio(LocalTime horarioInicio) {
+        this.horarioInicio = horarioInicio;
+    }
+
+    public LocalTime getHorarioFim() {
+        return horarioFim;
+    }
+
+    public void setHorarioFim(LocalTime horarioFim) {
+        this.horarioFim = horarioFim;
     }
 
     public String getTipo() {
@@ -86,19 +116,41 @@ public class Reserva {
         this.tipo = tipo;
     }
 
-    public String getLocal() {
-        return local;
+    public StatusReserva getStatus() {
+        return status;
     }
 
-    public void setLocal(String local) {
-        this.local = local;
+    public void setStatus(StatusReserva status) {
+        this.status = status;
     }
 
-    public boolean isDisponibilidade() {
-        return disponibilidade;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setDisponibilidade(boolean disponibilidade) {
-        this.disponibilidade = disponibilidade;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
+
+    public Salas getSala() {
+        return sala;
+    }
+
+    public void setSala(Salas sala) {
+        this.sala = sala;
+    }
+
+    public List<ReservaEquipamento> getEquipamentos() {
+        return equipamentos;
+    }
+
+   public void setEquipamentos(List<ReservaEquipamento> equipamentos) {
+    this.equipamentos.clear();
+
+    if (equipamentos != null) {
+        for (ReservaEquipamento item : equipamentos) {
+            adicionarEquipamento(item);
+        }
+    }
+}
 }
