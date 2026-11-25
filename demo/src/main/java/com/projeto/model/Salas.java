@@ -19,9 +19,12 @@ public class Salas {
     @Column(name = "nome", nullable = false, length = 100)
     private String nome;
 
-    
     @Column(name = "capacidade", nullable = false)
     private Integer capacidade;
+
+
+    @Column(name = "disponibilidade", nullable = false)
+    private boolean disponibilidade = true;
 
     // =========================================================
     // CONSTRUTORES
@@ -30,15 +33,22 @@ public class Salas {
     public Salas() {
     }
 
-    public Salas(String nome, Integer capacidade) {
+    public Salas(String nome, Integer capacidade, boolean disponibilidade) {
         this.nome = nome;
         this.capacidade = capacidade;
+        this.disponibilidade =disponibilidade;
     }
 
     // =========================================================
     // GETTERS E SETTERS
     // =========================================================
+    public boolean isDisponibilidade() {
+        return disponibilidade;
+    }
 
+    public void setDisponibilidade(boolean disponibilidade) {
+        this.disponibilidade = disponibilidade;
+    }
     public Long getId() {
         return id;
     }
