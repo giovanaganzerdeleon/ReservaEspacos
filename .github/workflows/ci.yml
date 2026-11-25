@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+      - main
+  pull_request:
+
+jobs:
+  build-lint-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Build
+        working-directory: backend
+        run: mvn -B -DskipTests package
+      - name: Lint
+        working-directory: backend
+        run: mvn -B checkstyle:check
+      - name: Tests
+        working-directory: backend
+        run: mvn -B test

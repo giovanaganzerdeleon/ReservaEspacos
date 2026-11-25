@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReservaCampus</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <main id="auth-view" class="auth-layout">
+        <section class="auth-intro">
+            <p class="eyebrow">Senac · Espaços do campus</p>
+            <h1>Seu próximo espaço começa aqui.</h1>
+            <p>Consulte e organize salas do campus em um só lugar.</p>
+            <div class="auth-decoration" aria-hidden="true">RC</div>
+        </section>
+
+        <section class="auth-card">
+            <p class="eyebrow">ReservaCampus</p>
+            <h2 id="auth-title">Boas-vindas</h2>
+            <p id="auth-description" class="muted">Entre com seu e-mail para continuar.</p>
+
+            <form id="login-form" class="auth-form">
+                <label>
+                    E-mail
+                    <input id="login-email" type="email" autocomplete="email" placeholder="voce@exemplo.com" required>
+                </label>
+                <label>
+                    Senha
+                    <input id="login-password" type="password" autocomplete="current-password" minlength="8" required>
+                </label>
+                <p id="login-message" class="form-message" role="alert"></p>
+                <button class="button button-primary button-full" type="submit">Entrar</button>
+            </form>
+
+            <form id="signup-form" class="auth-form hidden">
+                <label>
+                    Nome
+                    <input id="signup-name" type="text" autocomplete="name" maxlength="100" required>
+                </label>
+                <label>
+                    E-mail
+                    <input id="signup-email" type="email" autocomplete="email" maxlength="150" required>
+                </label>
+                <label>
+                    Senha
+                    <input id="signup-password" type="password" autocomplete="new-password" minlength="8" required>
+                    <small class="input-hint">Use pelo menos 8 caracteres.</small>
+                </label>
+                <p id="signup-message" class="form-message" role="alert"></p>
+                <button class="button button-primary button-full" type="submit">Criar conta</button>
+            </form>
+
+            <p class="auth-switch">
+                <span id="auth-switch-label">Ainda não tem uma conta?</span>
+                <button id="auth-switch-button" class="text-button" type="button">Criar conta</button>
+            </p>
+        </section>
+    </main>
+
+    <main id="rooms-view" class="app hidden">
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">Senac · MVP</p>
+                <h1>ReservaCampus</h1>
+            </div>
+            <div class="account-actions">
+                <span id="current-user" class="user-label"></span>
+                <button id="logout-button" class="button" type="button">Sair</button>
+                <button id="new-room-button" class="button button-primary" type="button">Nova sala</button>
+            </div>
+        </header>
+
+        <section class="stats" aria-label="Resumo">
+            <article>
+                <span id="total-count">0</span>
+                <small>salas cadastradas</small>
+            </article>
+            <article>
+                <span id="available-count">0</span>
+                <small>disponíveis</small>
+            </article>
+        </section>
+
+        <section class="reservation-layout">
+            <section class="reservation-panel">
+                <p class="eyebrow">Agenda</p>
+                <h2 id="booking-title">Reservar um espaço</h2>
+                <form id="booking-form">
+                    <input id="booking-id" type="hidden">
+                    <label>
+                        Sala
+                        <select id="booking-room" required></select>
+                    </label>
+                    <label>
+                        Data
+                        <input id="booking-date" type="date" required>
+                    </label>
+                    <div class="time-fields">
+                        <label>
+                            Início
+                            <input id="booking-start" type="time" required>
+                        </label>
+                        <label>
+                            Fim
+                            <input id="booking-end" type="time" required>
+                        </label>
+                    </div>
+                    <p id="booking-message" class="form-message" role="alert"></p>
+                    <div class="booking-actions">
+                        <button id="cancel-edit-button" class="button hidden" type="button">Cancelar edição</button>
+                        <button class="button button-primary" type="submit">Confirmar reserva</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="my-bookings">
+                <p class="eyebrow">Sua agenda</p>
+                <h2>Minhas reservas</h2>
+                <div id="bookings-list" class="bookings-list" aria-live="polite"></div>
+            </section>
+        </section>
+
+        <section class="catalog-section">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">Espaços</p>
+                    <h2>Salas do campus</h2>
+                </div>
+            </div>
+        <section class="toolbar">
+            <label class="search">
+                <span>Buscar</span>
+                <input id="search-input" type="search" placeholder="Nome da sala">
+            </label>
+            <label class="filter">
+                <span>Filtro</span>
+                <select id="availability-filter">
+                    <option value="all">Todas</option>
+                    <option value="available">Disponíveis</option>
+                    <option value="unavailable">Indisponíveis</option>
+                </select>
+            </label>
+        </section>
+
+        <section id="rooms-grid" class="rooms-grid" aria-live="polite"></section>
+        </section>
+    </main>
+
+    <dialog id="room-dialog">
+        <form id="room-form">
+            <div class="dialog-header">
+                <div>
+                    <p class="eyebrow">Cadastro</p>
+                    <h2 id="dialog-title">Nova sala</h2>
+                </div>
+                <button id="close-dialog" class="icon-button" type="button" aria-label="Fechar">×</button>
+            </div>
+            <input id="room-id" type="hidden">
+            <label>
+                Nome
+                <input id="room-name" name="nome" type="text" maxlength="100" required>
+            </label>
+            <label>
+                Capacidade
+                <input id="room-capacity" name="capacidade" type="number" min="1" max="1000" required>
+            </label>
+            <label class="checkbox">
+                <input id="room-availability" name="disponibilidade" type="checkbox" checked>
+                Sala disponível
+            </label>
+            <p id="form-message" class="form-message" role="alert"></p>
+            <div class="dialog-actions">
+                <button id="cancel-dialog" class="button" type="button">Cancelar</button>
+                <button class="button button-primary" type="submit">Salvar</button>
+            </div>
+        </form>
+    </dialog>
+
+    <script src="/app.js"></script>
+</body>
+</html>
