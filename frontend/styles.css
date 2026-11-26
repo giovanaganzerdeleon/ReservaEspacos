@@ -95,7 +95,9 @@ body {
 
 .auth-form,
 #booking-form,
-#room-form {
+#item-booking-form,
+#room-form,
+#item-form {
     display: grid;
     gap: 16px;
 }
@@ -226,6 +228,29 @@ p {
     font-size: 14px;
 }
 
+.page-tabs {
+    display: flex;
+    gap: 8px;
+    margin: 24px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.page-tab {
+    border: 0;
+    border-bottom: 3px solid transparent;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+    padding: 12px 16px;
+}
+
+.page-tab.active {
+    border-bottom-color: var(--primary);
+    color: var(--primary);
+}
+
 .stats {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 180px));
@@ -337,6 +362,16 @@ p {
     justify-content: space-between;
 }
 
+.page-heading {
+    align-items: flex-start;
+    margin-top: 24px;
+}
+
+.page-heading .muted {
+    max-width: 640px;
+    line-height: 1.5;
+}
+
 .toolbar {
     justify-content: flex-start;
     gap: 12px;
@@ -351,7 +386,8 @@ p {
     width: 280px;
 }
 
-.rooms-grid {
+.rooms-grid,
+.items-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 16px;
@@ -362,6 +398,30 @@ p {
     border-radius: 12px;
     background: var(--surface);
     padding: 20px;
+}
+
+.item-card {
+    display: flex;
+    min-height: 145px;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+    padding: 20px;
+}
+
+.item-card h3 {
+    margin: 8px 0;
+    font-size: 18px;
+}
+
+.item-category {
+    color: var(--primary);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
 }
 
 .room-card h2 {
@@ -423,7 +483,8 @@ dialog::backdrop {
     background: rgba(23, 32, 51, 0.45);
 }
 
-#room-form {
+#room-form,
+#item-form {
     padding: 24px;
 }
 
@@ -473,7 +534,8 @@ dialog::backdrop {
         margin: 28px auto;
     }
 
-    .rooms-grid {
+    .rooms-grid,
+    .items-grid {
         grid-template-columns: 1fr;
     }
 
@@ -504,5 +566,10 @@ dialog::backdrop {
     .search input,
     .toolbar select {
         width: 100%;
+    }
+
+    .page-heading {
+        flex-direction: column;
+        gap: 12px;
     }
 }

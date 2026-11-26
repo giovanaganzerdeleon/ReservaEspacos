@@ -21,3 +21,11 @@ As entradas descrevem o trabalho assistido por IA neste repositório. O conteúd
 - **Trabalho gerado/assistido:** Atualização dos READMEs, registros de arquitetura/decisões, logs de IA, checklist de status e roteiro de apresentação/check-in; movimentação da aplicação Java para `/backend` e do briefing de apoio para `/docs`.
 - **Revisão e correções humanas:** Manter os READMEs principais na raiz; não inventar responsáveis pela apresentação, links do board, acesso do professor, commits individuais ou resultados remotos da CI; marcar esses itens para confirmação da equipe/GitHub.
 - **Validação:** As afirmações da documentação são conferidas com a árvore de arquivos e os resultados locais dos testes. As ações externas restantes aparecem explicitamente nos arquivos de status bilíngues.
+
+### Reservas de itens do campus
+
+- **Ferramenta:** GitHub Copilot no VS Code.
+- **Resumo do prompt:** Adicionar uma página no sistema para reservar itens do campus/Senac com controle de quantidade em estoque, incluindo projetores, notebooks, equipamentos de laboratório, lousas e canetões; manter os arquivos Markdown do projeto atualizados.
+- **Trabalho gerado/assistido:** Entidades de item e reserva de item, APIs autenticadas, validação de disponibilidade com bloqueio da linha do item, carga inicial demonstrativa e interface **Itens do campus** para catálogo, reserva, edição, cancelamento e disponibilidade por quantidade.
+- **Revisão e correções humanas:** Tratar quantidades como dados demonstrativos, não como inventário Senac verificado; manter esta funcionalidade separada das reservas de sala; calcular estoque compartilhado considerando intervalos sobrepostos; documentar recorrência e integração com inventário oficial como fora do escopo.
+- **Validação:** Checkstyle reportou 0 violações e 15 testes do back-end passaram, incluindo quatro testes focados no serviço de reservas de itens e um teste de repositório para estoque sobreposto, adjacente, cancelado e ignorado na edição. Ainda falta testar o novo fluxo via HTTP/navegador.

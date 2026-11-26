@@ -2,20 +2,21 @@
 
 **English** · [Português (Brasil)](README.pt-BR.md)
 
-ReservaCampus is a campus room-booking MVP. Its front-end is maintained separately from the Java REST back-end.
+ReservaCampus is a campus resource-booking MVP. Its front-end is maintained separately from the Java REST back-end.
 
 ## Problem and solution
 
-Students and campus teams often depend on chats or spreadsheets to find a room. Information can be outdated and two groups may plan to use the same space. ReservaCampus provides a room catalog and lets signed-in users create, view, edit, or cancel bookings. The back-end rejects overlapping bookings for the same room and time.
+Students and campus teams often depend on chats or spreadsheets to find rooms and classroom materials. Information can be outdated and two groups may plan to use the same resource. ReservaCampus provides room and item catalogs and lets signed-in users create, view, edit, or cancel bookings. Room bookings cannot overlap; item bookings also enforce the available stock quantity for each time window.
 
 ## MVP scope
 
 - Account registration and email/password sign-in.
 - Room catalog with name, capacity, and availability.
-- Create, list, edit, and cancel a user's bookings.
-- Prevent overlapping active bookings for a room.
+- Campus item catalog with category and stock quantity; users can add classroom materials and equipment.
+- Create, list, edit, and cancel a user's room and item bookings.
+- Prevent overlapping room bookings and prevent reservations from exceeding item stock.
 
-Equipment booking, recurring bookings, campus-system integration, approvals, and AI-generated alternative slots are outside the current MVP.
+Recurring bookings, campus-system integration, approvals, and AI-generated alternative slots are outside the current MVP. The initial item quantities are demonstration data and must be adjusted to match the real campus inventory.
 
 ## Stack
 
@@ -54,7 +55,7 @@ cd backend
 .\mvnw.cmd clean spring-boot:run
 ```
 
-Open [http://127.0.0.1:8080](http://127.0.0.1:8080), create an account, and then manage rooms and bookings. Stop an existing app with `Ctrl+C` before starting another copy because embedded H2 locks its local database file.
+Open [http://127.0.0.1:8080](http://127.0.0.1:8080), create an account, and use the **Salas** and **Itens do campus** tabs to manage bookings. If the item table is empty, the back-end seeds demonstration entries for a projector, notebooks, lab kits, a mobile whiteboard, and marker kits. Stop an existing app with `Ctrl+C` before starting another copy because embedded H2 locks its local database file.
 
 The local database is stored under `backend/data/`. It is machine-specific and must not be committed.
 
@@ -63,8 +64,10 @@ The local database is stored under `backend/data/`. It is machine-specific and m
 - `POST /auth/cadastro`, `POST /auth/login`, `GET /auth/me`, `POST /auth/logout`
 - `GET|POST /salas`, `GET|PUT|DELETE /salas/{id}`, `GET /salas/disponiveis`
 - `GET /reservas/minhas`, `POST /reservas`, `PUT /reservas/{id}`, `DELETE /reservas/{id}`
+- `GET|POST /itens`, `GET /itens/disponiveis?data=YYYY-MM-DD&horaInicio=HH:mm&horaFim=HH:mm`
+- `GET /reservas-itens/minhas`, `POST /reservas-itens`, `PUT /reservas-itens/{id}`, `DELETE /reservas-itens/{id}`
 
-Room and booking routes require the session cookie returned by registration or login. A booking body contains `salaId`, `data` (`YYYY-MM-DD`), `horaInicio`, and `horaFim` (`HH:mm`). The requester is taken from the authenticated session, not from client input.
+Room, item, and booking routes require the session cookie returned by registration or login. A room booking body contains `salaId`, `data` (`YYYY-MM-DD`), `horaInicio`, and `horaFim` (`HH:mm`). An item booking body contains `itemId`, `quantidade`, `data`, `horaInicio`, and `horaFim`. The requester is taken from the authenticated session, not from client input.
 
 ## Tests and CI
 

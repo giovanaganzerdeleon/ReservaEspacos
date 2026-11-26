@@ -15,12 +15,14 @@ Este status separa o trabalho local das ações que dependem da equipe ou do Git
 
 - [x] Implementar o fluxo central: cadastro/login, gerenciamento de salas e criação/listagem/edição/cancelamento das próprias reservas.
 - [x] Rejeitar reservas ativas sobrepostas para uma sala; permitir horários adjacentes.
+- [x] Adicionar a página **Itens do campus** para equipamentos e materiais de sala; reservar, listar, editar ou cancelar uma quantidade por período.
+- [x] Rejeitar reservas de item que ultrapassem o estoque em períodos sobrepostos; cadastrar estoque demonstrativo identificado para projetores, notebooks, kits de laboratório, lousa e canetões.
 - [ ] Executar o fluxo completo de reserva com a aplicação em funcionamento. A ferramenta de inicialização Java retornou falha de build Maven sem expor a causa; não foi feito teste HTTP de reserva nesta etapa.
 - [ ] Verificar pelo menos um Conventional Commit de cada integrante hoje; não criar commits em nome dos colegas.
 
 ## 3. Testes
 
-- [x] Testes de serviço do back-end executados localmente: 10 testes aprovados, 0 falhas.
+- [x] Testes de serviço e repositório do back-end executados localmente: 15 testes aprovados, 0 falhas.
 - [x] Checkstyle executado localmente: 0 violações.
 - [ ] Adicionar/confirmar teste automatizado de front-end. O repositório atual não possui runner de testes de front-end.
 - [ ] Adicionar/confirmar teste HTTP/de integração para o ciclo de vida da reserva; a cobertura automatizada atual está no nível de serviço.
@@ -42,7 +44,7 @@ Este status separa o trabalho local das ações que dependem da equipe ou do Git
 
 - [x] `.gitignore` ignora arquivos `.env` e o novo caminho local do banco H2.
 - [x] Verificar os 10 commits mais recentes e os arquivos não binários atuais por padrões comuns de chave privada, AWS, GitHub token e atribuição de credenciais; nenhuma ocorrência. Esta é uma busca direcionada, não uma garantia contra todo formato possível de segredo. Trocar qualquer credencial que se saiba exposta.
-- [ ] Revisar a exclusão pendente do antigo `demo/data/reservas.mv.db`, que era rastreado, antes de fazer commit. A cópia local continua em `backend/data/`, ignorada pelo Git; não adicionar o banco novamente.
+- [x] Manter a cópia local do H2 em `backend/data/`, ignorada pelo Git; não adicioná-la ao repositório. O caminho antigo rastreado foi removido da árvore da branch atual, mas o arquivo continua no histórico remoto anterior e pode exigir revisão coordenada do histórico/credenciais se continha dados sensíveis.
 
 ## 7–8. Apresentação e check-in com o professor
 
@@ -52,11 +54,11 @@ Este status separa o trabalho local das ações que dependem da equipe ou do Git
 
 ## Verificações locais realizadas
 
-Na pasta `backend/`, `.\mvnw.cmd -B checkstyle:check test package` terminou com sucesso: 10 testes aprovados, 0 violações do Checkstyle e build do pacote concluído. O código ainda não foi commitado nem enviado neste worktree. A informação do GitHub Actions acima vem da consulta ao repositório remoto; nenhuma execução foi retornada.
+Na pasta `backend/`, `.\mvnw.cmd -B checkstyle:check test` terminou com sucesso: 15 testes aprovados e 0 violações do Checkstyle. As alterações de reserva de itens ainda não foram commitadas nem enviadas; o fluxo precisa de teste HTTP/navegador ao vivo. A informação do GitHub Actions acima vem da consulta ao repositório remoto; nenhuma execução foi retornada.
 
 ## Próximas ações da equipe
 
-1. Concluir a demo de reservas em execução e adicionar/executar teste HTTP de integração.
+1. Concluir a demo de reserva de salas e itens em execução e adicionar/executar teste HTTP de integração.
 2. Enviar por Pull Request revisado; depois verificar o resultado do Actions e a proteção da branch.
 3. Atribuir tarefas no board, definir responsáveis pela apresentação e confirmar o acesso do professor/responsável de TI.
 4. Revisar o histórico recente em busca de segredos e garantir que o arquivo local H2 não entre no commit.

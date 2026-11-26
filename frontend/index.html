@@ -11,7 +11,7 @@
         <section class="auth-intro">
             <p class="eyebrow">Senac · Espaços do campus</p>
             <h1>Seu próximo espaço começa aqui.</h1>
-            <p>Consulte e organize salas do campus em um só lugar.</p>
+            <p>Consulte e organize salas e materiais de aula em um só lugar.</p>
             <div class="auth-decoration" aria-hidden="true">RC</div>
         </section>
 
@@ -71,6 +71,12 @@
             </div>
         </header>
 
+        <nav class="page-tabs" aria-label="Áreas do sistema">
+            <button id="rooms-tab" class="page-tab active" type="button" aria-current="page">Salas</button>
+            <button id="items-tab" class="page-tab" type="button">Itens do campus</button>
+        </nav>
+
+        <section id="rooms-page">
         <section class="stats" aria-label="Resumo">
             <article>
                 <span id="total-count">0</span>
@@ -145,6 +151,83 @@
 
         <section id="rooms-grid" class="rooms-grid" aria-live="polite"></section>
         </section>
+        </section>
+
+        <section id="items-page" class="hidden">
+            <div class="section-heading page-heading">
+                <div>
+                    <p class="eyebrow">Materiais e equipamentos</p>
+                    <h2>Itens do campus</h2>
+                    <p class="muted">Reserve quantidades para uma data e horário. Os estoques abaixo são demonstrativos.</p>
+                </div>
+                <button id="new-item-button" class="button button-primary" type="button">Cadastrar item</button>
+            </div>
+
+            <section class="stats" aria-label="Resumo do estoque">
+                <article>
+                    <span id="item-type-count">0</span>
+                    <small>tipos de item</small>
+                </article>
+                <article>
+                    <span id="item-stock-count">0</span>
+                    <small>unidades cadastradas</small>
+                </article>
+            </section>
+
+            <section class="reservation-layout">
+                <section class="reservation-panel">
+                    <p class="eyebrow">Agenda de itens</p>
+                    <h2 id="item-booking-title">Reservar itens</h2>
+                    <form id="item-booking-form">
+                        <input id="item-booking-id" type="hidden">
+                        <label>
+                            Item
+                            <select id="item-booking-item" required></select>
+                        </label>
+                        <label>
+                            Data
+                            <input id="item-booking-date" type="date" required>
+                        </label>
+                        <div class="time-fields">
+                            <label>
+                                Início
+                                <input id="item-booking-start" type="time" required>
+                            </label>
+                            <label>
+                                Fim
+                                <input id="item-booking-end" type="time" required>
+                            </label>
+                        </div>
+                        <label>
+                            Quantidade
+                            <input id="item-booking-quantity" type="number" min="1" value="1" required>
+                        </label>
+                        <p id="item-availability-message" class="input-hint" aria-live="polite"></p>
+                        <p id="item-booking-message" class="form-message" role="alert"></p>
+                        <div class="booking-actions">
+                            <button id="cancel-item-edit-button" class="button hidden" type="button">Cancelar edição</button>
+                            <button class="button button-primary" type="submit">Confirmar reserva</button>
+                        </div>
+                    </form>
+                </section>
+
+                <section class="my-bookings">
+                    <p class="eyebrow">Sua agenda</p>
+                    <h2>Minhas reservas de itens</h2>
+                    <div id="item-bookings-list" class="bookings-list" aria-live="polite"></div>
+                </section>
+            </section>
+
+            <section class="catalog-section">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">Estoque demonstrativo</p>
+                        <h2>Catálogo de itens</h2>
+                    </div>
+                </div>
+                <section id="items-grid" class="items-grid" aria-live="polite"></section>
+            </section>
+        </section>
     </main>
 
     <dialog id="room-dialog">
@@ -173,6 +256,35 @@
             <div class="dialog-actions">
                 <button id="cancel-dialog" class="button" type="button">Cancelar</button>
                 <button class="button button-primary" type="submit">Salvar</button>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog id="item-dialog">
+        <form id="item-form">
+            <div class="dialog-header">
+                <div>
+                    <p class="eyebrow">Estoque do campus</p>
+                    <h2>Cadastrar item</h2>
+                </div>
+                <button id="close-item-dialog" class="icon-button" type="button" aria-label="Fechar">×</button>
+            </div>
+            <label>
+                Nome
+                <input id="item-name" type="text" maxlength="120" required>
+            </label>
+            <label>
+                Categoria
+                <input id="item-category" type="text" maxlength="80" placeholder="Ex.: Audiovisual" required>
+            </label>
+            <label>
+                Quantidade no estoque
+                <input id="item-stock" type="number" min="1" max="10000" value="1" required>
+            </label>
+            <p id="item-form-message" class="form-message" role="alert"></p>
+            <div class="dialog-actions">
+                <button id="cancel-item-dialog" class="button" type="button">Cancelar</button>
+                <button class="button button-primary" type="submit">Salvar item</button>
             </div>
         </form>
     </dialog>

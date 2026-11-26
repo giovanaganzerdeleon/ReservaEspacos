@@ -27,12 +27,12 @@ Este arquivo registra as escolhas atuais de implementação do MVP. A equipe dev
 - **Motivo:** Navegador e API são servidos pela mesma origem local; um cookie de sessão é suficiente e evita manter credenciais bearer no armazenamento do navegador.
 - **Consequência:** O desenvolvimento local usa a sessão da aplicação; deploy de produção e operações de sessão ainda não foram configurados.
 
-### Manter o fluxo de reserva focado
+### Incluir itens compartilhados do campus com reserva limitada pelo estoque
 
-- **Decisão:** Um usuário autenticado pode criar, consultar, editar ou cancelar as próprias reservas de sala. Reservas ativas não podem se sobrepor para a mesma sala; intervalos adjacentes são permitidos.
-- **Alternativas consideradas:** Incluir recorrência, equipamentos, aprovações ou sugestão automática de horários alternativos no escopo do Dia 3.
-- **Motivo:** O ciclo de vida da reserva e a detecção de conflito são a menor extensão demonstrável de ponta a ponta do catálogo existente.
-- **Consequência:** Reservas canceladas são mantidas como registros cancelados; o MVP não inclui recorrência nem aprovação administrativa.
+- **Decisão:** Adicionar uma página **Itens do campus** onde usuários autenticados podem criar, consultar, editar ou cancelar reservas de uma quantidade de itens do estoque, incluindo projetores, notebooks, kits de laboratório, lousas e kits de canetões. Reservas ativas do mesmo item podem se sobrepor somente enquanto a quantidade combinada não ultrapassar o estoque; horários adjacentes não se sobrepõem.
+- **Alternativas consideradas:** Reservar uma unidade física por pedido ou permitir reserva de equipamento somente junto com uma sala.
+- **Motivo:** Estoque compartilhado representa melhor materiais como kits de canetões e permite demonstrar equipamentos e materiais básicos de sala.
+- **Consequência:** As quantidades iniciais são ilustrativas, não correspondem a um inventário Senac verificado. Recorrência, aprovação e sincronização com um sistema oficial de estoque continuam fora do escopo. Reservas canceladas são mantidas como registros cancelados.
 
 ### Executar as mesmas verificações localmente e na CI
 

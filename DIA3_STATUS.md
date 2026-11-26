@@ -15,12 +15,14 @@ This status distinguishes local work from actions that need the team or GitHub. 
 
 - [x] Implement the core user flow: sign up/sign in, manage rooms, and create/list/edit/cancel one's own bookings.
 - [x] Reject overlapping active bookings for a room; allow adjacent bookings.
+- [x] Add an **Items** page for campus equipment/classroom materials; reserve, list, edit, or cancel a quantity from stock for a date/time range.
+- [x] Reject item reservations that would make overlapping bookings exceed stock; seed clearly labeled demonstration inventory for projectors, notebooks, lab kits, a whiteboard, and marker kits.
 - [ ] Exercise the complete booking flow against a running application. The Java debug launch tool returned a Maven build failure without exposing the underlying cause; no live booking HTTP check was completed in this pass.
 - [ ] Verify at least one Conventional Commit from every team member today; do not create commits on behalf of teammates.
 
 ## 3. Tests
 
-- [x] Back-end service tests run locally: 10 tests passed, 0 failures.
+- [x] Back-end service and repository tests run locally: 15 tests passed, 0 failures.
 - [x] Checkstyle run locally: 0 violations.
 - [ ] Add/confirm an automated front-end test. There is no front-end test runner in the current repository.
 - [ ] Add/confirm an HTTP/integration test for the end-to-end booking lifecycle; current automated coverage is service-level.
@@ -42,7 +44,7 @@ This status distinguishes local work from actions that need the team or GitHub. 
 
 - [x] `.gitignore` excludes `.env` files and the new local H2 database path.
 - [x] Scan the 10 most recent commits and current non-binary worktree files for common private-key, AWS, GitHub-token, and credential-assignment patterns; no matches. This is a targeted scan, not a guarantee against every secret format. Rotate any known exposed credential.
-- [ ] Review the pending deletion of the previously tracked `demo/data/reservas.mv.db` before committing. Its local copy remains under ignored `backend/data/`; do not add the database back to Git.
+- [x] Keep the local H2 copy under ignored `backend/data/`; do not add it to Git. The old tracked path is removed from the current branch tree, but the file remains in earlier remote history and may need a coordinated history/credential review if it contained sensitive data.
 
 ## 7–8. Team presentation and instructor check-in
 
@@ -52,11 +54,11 @@ This status distinguishes local work from actions that need the team or GitHub. 
 
 ## Local verification performed
 
-From `backend/`, `.\mvnw.cmd -B checkstyle:check test package` completed successfully: 10 tests passed, Checkstyle reported 0 violations, and the package build succeeded. The code has not been committed or pushed in this worktree. The GitHub Actions check above is based on the live repository query; no run was returned.
+From `backend/`, `.\mvnw.cmd -B checkstyle:check test` completed successfully: 15 tests passed and Checkstyle reported 0 violations. The item-booking changes are not yet committed or pushed; the flow still needs a live HTTP/browser check. The GitHub Actions check above is based on the live repository query; no run was returned.
 
 ## Next actions for the team
 
-1. Complete the live booking demo and add/execute an HTTP integration test.
+1. Complete the live room-and-item booking demo and add/execute an HTTP integration test.
 2. Push via a reviewed Pull Request, then check the Actions result and branch protection.
 3. Assign board tasks and presentation owners; confirm instructor/IT collaborator access.
 4. Review the recent history for secrets and confirm that the local H2 file stays out of the commit.

@@ -27,12 +27,12 @@ This file records the current implementation choices for the MVP. The team shoul
 - **Reason:** The browser and API are served from one local origin, so a session cookie is sufficient and avoids keeping bearer credentials in browser storage.
 - **Trade-off:** Local development uses the application's session store; production deployment and session operations have not been configured.
 
-### Keep the booking flow focused
+### Include shared campus items with stock-aware bookings
 
-- **Decision:** A signed-in user can create, view, edit, or cancel their own room bookings. Active bookings cannot overlap for the same room; adjacent time intervals are allowed.
-- **Alternatives considered:** Add recurring events, equipment, approval workflows, or automatic alternative-slot suggestions to the Day 3 scope.
-- **Reason:** The booking lifecycle and conflict check are the smallest demonstrable end-to-end extension of the existing room catalog.
-- **Trade-off:** Cancelled bookings are retained as cancelled records, and the MVP does not include recurring bookings or administrative approvals.
+- **Decision:** Add an **Itens do campus** page where a signed-in user can create, view, edit, or cancel bookings for a quantity of stock items, including projectors, notebooks, lab kits, whiteboards, and marker kits. Active bookings for the same item may overlap only while the combined quantity remains within stock; adjacent time intervals do not overlap.
+- **Alternatives considered:** Reserve a single physical unit per booking or reserve equipment only as part of a room booking.
+- **Reason:** Shared stock better represents classroom supplies such as marker kits and lets the demo cover both equipment and basic classroom materials.
+- **Trade-off:** Initial stock counts are illustrative, not verified Senac inventory. Recurrence, approvals, and synchronization with an official inventory system remain outside scope. Cancelled bookings are retained as cancelled records.
 
 ### Run the same quality checks locally and in CI
 
