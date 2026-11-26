@@ -29,8 +29,7 @@ Este checklist acompanha o fechamento do MVP e a preparação da demo. Uma caixa
 ## 4. Testes e pipeline
 
 - [x] `AuthServiceTest`: 5 testes aprovados, incluindo senha correta/incorreta e hash armazenado inválido.
-- [x] A última execução completa registrada antes das alterações atuais teve 15 testes aprovados e Checkstyle sem violações.
-- [ ] Rodar novamente a suíte completa e Checkstyle após as alterações atuais; confirmar que não há testes essenciais vazios.
+- [x] Execução limpa após as alterações atuais: 17 testes aprovados e 0 violações do Checkstyle.
 - [ ] Confirmar o resultado verde mais recente do GitHub Actions. A execução verde do PR #4 é anterior às alterações locais atuais.
 - [ ] Avaliar/adicionar teste HTTP de integração para o ciclo de vida de reserva; atualmente não há runner automatizado de front-end.
 
@@ -48,8 +47,10 @@ Este checklist acompanha o fechamento do MVP e a preparação da demo. Uma caixa
 
 - A chamada local a `127.0.0.1:8080` foi recusada porque não havia processo escutando nessa porta. O “Failed to fetch” acontece antes de a API responder; não é uma rejeição de senha ou dos campos do cadastro.
 - Abrir uma branch do GitHub ou `frontend/index.html` não inicia o servidor. Para teste local, iniciar Spring Boot em `backend/` e acessar `http://127.0.0.1:8080` no mesmo computador. A aplicação ainda não tem deploy público.
-- A classe `AuthServiceTest` passou com 5 testes. A suíte completa e o Checkstyle precisam ser reexecutados depois das alterações mais recentes.
+- A suíte completa passou com 17 testes e o Checkstyle reportou 0 violações após as alterações mais recentes.
 - O JavaScript de conexão agora mostra uma orientação mais clara quando a API não está acessível. Não foi possível executar `node --check`, pois Node.js não está instalado neste ambiente.
+- Foi criado `iniciar.bat` para iniciar o back-end com duplo clique; a execução real do iniciador e o fluxo HTTP ainda precisam ser testados.
+- A aplicação agora emite `ReservaCampus esta pronto` após concluir a inicialização; confirmar a mensagem no primeiro teste real.
 - A pipeline verde do PR #4 é um resultado anterior; as mudanças locais atuais ainda precisam de PR e CI.
 
 ## Próximas ações prioritárias

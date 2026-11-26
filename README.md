@@ -34,6 +34,7 @@ Recurring bookings, campus-system integration, approvals, and AI-generated alter
 ├── backend/                  # Spring Boot application and automated tests
 ├── docs/                     # Briefing and presentation/check-in outlines
 ├── frontend/                 # Standalone HTML, CSS, and JavaScript source
+├── iniciar.bat               # Windows double-click launcher for the back-end
 ├── AI_LOG.md
 ├── AI_LOG.pt-BR.md
 ├── DECISIONS.md
@@ -50,16 +51,23 @@ The back-end serves files from `/frontend` during local development, so the brow
 
 > **Important:** opening `frontend/index.html` directly or viewing a GitHub branch does not start the API. Sign-up and sign-in require the Spring back-end to be running; each person running the app locally must start their own back-end. The application is not hosted for public access yet.
 
-## Run locally (Windows PowerShell)
+## Run locally (Windows)
 
 Prerequisite: Java 21. The Maven Wrapper downloads Maven on first use.
 
+1. From the project root, double-click `iniciar.bat`.
+2. Keep the terminal window open while using the app.
+3. Wait for `ReservaCampus esta pronto` to appear in the terminal.
+4. Only then open [http://127.0.0.1:8080](http://127.0.0.1:8080). If the message does not appear, the app has not started; check the terminal error.
+
+If startup fails, the window stays open so you can read the error. To start manually from PowerShell:
+
 ```powershell
-cd backend
-.\mvnw.cmd clean spring-boot:run
+cd C:\path\to\ReservaEspacos\backend
+.\mvnw.cmd spring-boot:run
 ```
 
-Open [http://127.0.0.1:8080](http://127.0.0.1:8080), create an account, and use the **Salas** and **Itens do campus** tabs to manage bookings. If the item table is empty, the back-end seeds demonstration entries for a projector, notebooks, lab kits, a mobile whiteboard, and marker kits. Stop an existing app with `Ctrl+C` before starting another copy because embedded H2 locks its local database file.
+Create an account and use the **Salas** and **Itens do campus** tabs to manage bookings. If the item table is empty, the back-end seeds demonstration entries for a projector, notebooks, lab kits, a mobile whiteboard, and marker kits. Stop an existing app with `Ctrl+C` before starting another copy because embedded H2 locks its local database file.
 
 The local database is stored under `backend/data/`. It is machine-specific and must not be committed.
 

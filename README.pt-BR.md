@@ -34,6 +34,7 @@ Recorrência, integração com sistemas do campus, aprovações e sugestões alt
 ├── backend/                  # Aplicação Spring Boot e testes automatizados
 ├── docs/                     # Briefing e roteiros de apresentação/check-in
 ├── frontend/                 # Código independente em HTML, CSS e JavaScript
+├── iniciar.bat               # Iniciador local do back-end no Windows
 ├── AI_LOG.md
 ├── AI_LOG.pt-BR.md
 ├── DECISIONS.md
@@ -50,16 +51,23 @@ Durante o desenvolvimento local, o back-end serve os arquivos de `/frontend`, en
 
 > **Importante:** abrir `frontend/index.html` diretamente ou visualizar uma branch do GitHub não inicia a API. Para cadastro e login, o back-end Spring precisa estar rodando; cada pessoa que executa localmente precisa iniciar o próprio back-end. A aplicação ainda não está hospedada para acesso público.
 
-## Executar localmente (PowerShell do Windows)
+## Executar localmente (Windows)
 
 Pré-requisito: Java 21. O Maven Wrapper baixa o Maven no primeiro uso.
 
+1. Na raiz do projeto, clique duas vezes em `iniciar.bat`.
+2. Mantenha a janela do terminal aberta enquanto usa o sistema.
+3. Aguarde a mensagem `ReservaCampus esta pronto` no terminal.
+4. Só então abra [http://127.0.0.1:8080](http://127.0.0.1:8080). Se a mensagem não aparecer, a aplicação ainda não iniciou; confira o erro no terminal.
+
+Se houver erro, a janela ficará aberta para mostrar a mensagem. Para iniciar pelo PowerShell manualmente:
+
 ```powershell
-cd backend
-.\mvnw.cmd clean spring-boot:run
+cd C:\caminho\para\ReservaEspacos\backend
+.\mvnw.cmd spring-boot:run
 ```
 
-Abra [http://127.0.0.1:8080](http://127.0.0.1:8080), crie uma conta e use as abas **Salas** e **Itens do campus** para gerenciar reservas. Se a tabela de itens estiver vazia, o back-end cadastra itens demonstrativos: projetor, notebooks, kits de laboratório, lousa móvel e kits de canetões. Pare uma instância existente com `Ctrl+C` antes de iniciar outra, pois o H2 embutido bloqueia o arquivo local do banco.
+Crie uma conta e use as abas **Salas** e **Itens do campus** para gerenciar reservas. Se a tabela de itens estiver vazia, o back-end cadastra itens demonstrativos: projetor, notebooks, kits de laboratório, lousa móvel e kits de canetões. Pare uma instância existente com `Ctrl+C` antes de iniciar outra, pois o H2 embutido bloqueia o arquivo local do banco.
 
 O banco local fica em `backend/data/`. É específico da máquina e não deve ser enviado ao repositório.
 
