@@ -11,7 +11,7 @@
 | 0:00–1:30 | Problema e público | Conflitos de reserva no campus; quem precisa da ferramenta e o que o MVP resolve. | A definir |
 | 1:30–3:00 | Produto e arquitetura | Separação de `/frontend` e `/backend`; fluxo navegador/API REST e H2 local. | A definir |
 | 3:00–8:00 | Demo ao vivo | Entrar; mostrar salas e a aba de itens do campus; reservar kits de canetões ou um projetor; tentar reservar acima do estoque restante e mostrar a rejeição; editar, listar e cancelar. | A definir |
-| 8:00–9:30 | Fluxo de trabalho | Mostrar Pull Request revisado, histórico de Conventional Commits e workflow/execução do Actions. Não afirmar que está verde até existir uma execução. | A definir |
+| 8:00–9:30 | Fluxo de trabalho | Mostrar o PR #4, o histórico de Conventional Commits e a execução verde do Actions; confirmar se o status continua atual no dia da apresentação. | A definir |
 | 9:30–11:00 | Decisões | Explicar Java/Spring, diretórios separados, sessões e por que recorrência/equipamentos/aprovações estão fora do MVP. | A definir |
 | 11:00–13:00 | Uso de IA | Mostrar o log de IA; descrever o que foi gerado e o que a equipe revisou ou recusou. | A definir |
 | 13:00–15:00 | Status e próximos passos | Demonstrar testes locais, informar o status real da pipeline remota, pendências e plano até o congelamento. | A definir |

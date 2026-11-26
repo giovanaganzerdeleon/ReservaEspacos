@@ -41,10 +41,14 @@ Recorrência, integração com sistemas do campus, aprovações e sugestões alt
 ├── README.md
 ├── README.pt-BR.md
 ├── DIA3_STATUS.md
-└── DIA3_STATUS.pt-BR.md
+├── DIA3_STATUS.pt-BR.md
+├── DIA4_STATUS.md
+└── DIA4_STATUS.pt-BR.md
 ```
 
 Durante o desenvolvimento local, o back-end serve os arquivos de `/frontend`, então navegador e API usam a mesma origem. O código-fonte continua separado e não exige gerenciador de pacotes para o front-end.
+
+> **Importante:** abrir `frontend/index.html` diretamente ou visualizar uma branch do GitHub não inicia a API. Para cadastro e login, o back-end Spring precisa estar rodando; cada pessoa que executa localmente precisa iniciar o próprio back-end. A aplicação ainda não está hospedada para acesso público.
 
 ## Executar localmente (PowerShell do Windows)
 
@@ -78,18 +82,18 @@ cd backend
 .\mvnw.cmd -B checkstyle:check test
 ```
 
-O GitHub Actions executa build, Checkstyle e testes em Pull Requests e pushes para `master` e `main`. A branch padrão atual do repositório é `master`; uma execução remota verde ainda precisa ser confirmada depois do envio destas alterações.
+O GitHub Actions executa build, Checkstyle e testes em Pull Requests e pushes para `master` e `main`. A execução do PR #4 passou nos três passos. A branch `main` está protegida e exige Pull Request; ainda falta confirmar a execução após o merge final em `master`/`main`.
 
 ## Equipe e links
 
 - **Turma:** TDS, turmas mistas 6570, 6756 e 6863.
 - **Integrantes listados no README anterior da equipe:** Giovana, Fábio, Theo e João Raupp; confirmar a lista e os usuários do GitHub com o grupo.
 - **Tech lead / responsáveis pelos blocos da apresentação:** a confirmar pelo grupo; ver [`docs/PRESENTATION_OUTLINE.pt-BR.md`](docs/PRESENTATION_OUTLINE.pt-BR.md).
-- **Colaborador professor:** o administrador do repositório precisa confirmar/adicionar `adrianoanschau@gmail.com`.
+- **Colaborador professor:** `adrianoanschau@gmail.com` foi adicionado ao repositório.
 - **Repositório:** [giovanaganzerdeleon/ReservaEspacos](https://github.com/giovanaganzerdeleon/ReservaEspacos).
 - **Board do GitHub:** o grupo precisa adicionar o link e definir responsáveis pelas tarefas.
 - **Deploy:** ainda não configurado.
 
 ## Verificações restantes da entrega
 
-Não é possível confirmar a partir deste worktree local o acesso remoto/board, a revisão das alterações atuais, Conventional Commits de todos os integrantes, o check-in com o professor ou uma execução verde do GitHub Actions. O status e as próximas ações estão em [`DIA3_STATUS.pt-BR.md`](DIA3_STATUS.pt-BR.md).
+Ainda precisam ser confirmados o board e a atribuição das tarefas, os Conventional Commits de todos os integrantes, a verificação ao vivo da aplicação, o ensaio da apresentação e a execução da pipeline após o merge. O professor já foi adicionado ao repositório e o Actions do PR #4 passou. O status atual do Dia 4 e as próximas ações estão em [`DIA4_STATUS.pt-BR.md`](DIA4_STATUS.pt-BR.md).

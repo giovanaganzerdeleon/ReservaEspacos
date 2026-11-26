@@ -4,8 +4,10 @@ This status distinguishes local work from actions that need the team or GitHub. 
 
 ## 1. Days 1–2 follow-up
 
-- [ ] Confirm the IT lead and instructor are repository collaborators; the instructor address in the briefing is `adrianoanschau@gmail.com`.
-- [ ] Confirm the project-creation Pull Request had a colleague review. Existing merged PRs do not establish that the current uncommitted changes were reviewed.
+- [ ] Confirm the IT lead is a repository collaborator.
+- [x] Instructor `adrianoanschau@gmail.com` has been added as a repository collaborator.
+- [x] Confirm that project work was submitted through Pull Requests; a reviewed PR is part of the team workflow.
+- [x] The `main` branch is protected and work requires a Pull Request.
 - [ ] Update the GitHub board and assign each task to a teammate; add the board link to the README.
 - [x] Document the MVP and stack in both root READMEs.
 - [x] Separate source into `/frontend` and `/backend`; keep supporting material in `/docs`.
@@ -30,7 +32,8 @@ This status distinguishes local work from actions that need the team or GitHub. 
 ## 4. Pipeline
 
 - [x] Workflow includes build, lint, and tests for pull requests and `master`/`main` pushes.
-- [ ] Push the workflow and changes, then confirm the latest GitHub Actions run is green. GitHub reported **0 workflow runs** when checked for this status update.
+- [x] Push the workflow and changes in a PR and confirm a green GitHub Actions run: PR #4's `build-lint-test` job passed build, Checkstyle, and tests.
+- [ ] After merging PR #4, confirm the push run on `master`/`main` as well.
 
 ## 5. Documentation and presentation
 
@@ -54,11 +57,11 @@ This status distinguishes local work from actions that need the team or GitHub. 
 
 ## Local verification performed
 
-From `backend/`, `.\mvnw.cmd -B checkstyle:check test` completed successfully: 15 tests passed and Checkstyle reported 0 violations. The item-booking changes are not yet committed or pushed; the flow still needs a live HTTP/browser check. The GitHub Actions check above is based on the live repository query; no run was returned.
+From `backend/`, `.\mvnw.cmd -B checkstyle:check test` completed successfully: 15 tests passed and Checkstyle reported 0 violations. The item-booking changes are committed and pushed to `feat/day3-mvp-creating-items-registers`; PR #4 is open and awaiting review. Its GitHub Actions job passed. The live HTTP/browser flow and the post-merge `master` run still need confirmation.
 
 ## Next actions for the team
 
-1. Complete the live room-and-item booking demo and add/execute an HTTP integration test.
-2. Push via a reviewed Pull Request, then check the Actions result and branch protection.
-3. Assign board tasks and presentation owners; confirm instructor/IT collaborator access.
-4. Review the recent history for secrets and confirm that the local H2 file stays out of the commit.
+1. Get PR #4 reviewed and merged; confirm the Actions run on the push to `master`.
+2. Complete the live room-and-item booking demo; add/run an HTTP integration test if time allows.
+3. Confirm instructor/IT access, assign board tasks, and define presentation owners.
+4. Verify each teammate's Conventional Commit and review history for secrets; keep the local H2 database out of Git.

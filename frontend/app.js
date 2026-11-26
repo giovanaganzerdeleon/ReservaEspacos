@@ -30,14 +30,22 @@ let itemBookings = [];
 let isSignupMode = false;
 
 async function request(url, options = {}) {
-    const response = await fetch(url, {
-        ...options,
-        credentials: "same-origin",
-        headers: {
-            ...(options.body ? { "Content-Type": "application/json" } : {}),
-            ...options.headers
+    let response;
+    try {
+        response = await fetch(url, {
+            ...options,
+            credentials: "same-origin",
+            headers: {
+                ...(options.body ? { "Content-Type": "application/json" } : {}),
+                ...options.headers
+            }
+        });
+    } catch (error) {
+        if (error instanceof TypeError) {
+            throw new Error("Não foi possível conectar à API. Inicie o back-end e abra http://127.0.0.1:8080; a branch do GitHub não hospeda o servidor.");
         }
-    });
+        throw error;
+    }
 
     if (!response.ok) {
         const body = await response.json().catch(() => ({}));
@@ -101,7 +109,7 @@ async function loadCurrentUser() {
         const user = await request(`${AUTH_URL}/me`);
         showRooms(user);
     } catch (error) {
-        showAuth(error.status === 401 ? "" : "Não foi possível conectar ao servidor. Tente novamente.");
+        showAuth(error.status === 401 ? "" : error.message || "Não foi possível conectar ao servidor. Tente novamente.");
     }
 }
 
@@ -455,7 +463,7 @@ loginForm.addEventListener("submit", async (event) => {
         const user = await request(`${AUTH_URL}/login`, {
             method: "POST",
             body: JSON.stringify({
-                email: document.getElementById("login-email").value,
+                email: document.getElementById("login-email").value.trim(),
                 senha: document.getElementById("login-password").value
             })
         });

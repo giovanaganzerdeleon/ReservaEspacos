@@ -4,8 +4,10 @@ Este status separa o trabalho local das ações que dependem da equipe ou do Git
 
 ## 1. Pendências dos Dias 1 e 2
 
-- [ ] Confirmar que o responsável de TI e o professor são colaboradores do repositório; o briefing informa o e-mail do professor como `adrianoanschau@gmail.com`.
-- [ ] Confirmar que o Pull Request de criação do projeto teve revisão de um colega. PRs anteriores merged não comprovam que as alterações locais atuais foram revisadas.
+- [ ] Confirmar que o responsável de TI é colaborador do repositório.
+- [x] O professor `adrianoanschau@gmail.com` foi adicionado como colaborador.
+- [x] Confirmar que o trabalho do projeto foi entregue por Pull Requests; PRs fazem parte do fluxo revisado da equipe.
+- [x] A branch `main` está protegida e exige Pull Request para receber alterações.
 - [ ] Atualizar o board do GitHub e atribuir cada tarefa a um integrante; adicionar o link do board ao README.
 - [x] Documentar o MVP e a stack nos dois READMEs da raiz.
 - [x] Separar as fontes em `/frontend` e `/backend`; manter materiais de apoio em `/docs`.
@@ -30,7 +32,8 @@ Este status separa o trabalho local das ações que dependem da equipe ou do Git
 ## 4. Pipeline
 
 - [x] Workflow inclui build, lint e testes em Pull Requests e pushes para `master`/`main`.
-- [ ] Enviar o workflow e as alterações; depois confirmar que a última execução do GitHub Actions ficou verde. O GitHub retornou **0 execuções** na consulta feita para este status.
+- [x] Enviar workflow e alterações por PR e confirmar uma execução verde do GitHub Actions: o job `build-lint-test` do PR #4 passou em build, Checkstyle e testes.
+- [ ] Após o merge do PR #4, confirmar também a execução do push em `master`/`main`.
 
 ## 5. Documentação e apresentação
 
@@ -54,11 +57,11 @@ Este status separa o trabalho local das ações que dependem da equipe ou do Git
 
 ## Verificações locais realizadas
 
-Na pasta `backend/`, `.\mvnw.cmd -B checkstyle:check test` terminou com sucesso: 15 testes aprovados e 0 violações do Checkstyle. As alterações de reserva de itens ainda não foram commitadas nem enviadas; o fluxo precisa de teste HTTP/navegador ao vivo. A informação do GitHub Actions acima vem da consulta ao repositório remoto; nenhuma execução foi retornada.
+Na pasta `backend/`, `.\mvnw.cmd -B checkstyle:check test` terminou com sucesso: 15 testes aprovados e 0 violações do Checkstyle. As alterações de reserva de itens estão commitadas e enviadas na branch `feat/day3-mvp-creating-items-registers`; o PR #4 está aberto e aguarda revisão. O job do GitHub Actions para esse PR passou. Ainda falta confirmar o fluxo HTTP/navegador ao vivo e a execução após o merge em `master`.
 
 ## Próximas ações da equipe
 
-1. Concluir a demo de reserva de salas e itens em execução e adicionar/executar teste HTTP de integração.
-2. Enviar por Pull Request revisado; depois verificar o resultado do Actions e a proteção da branch.
-3. Atribuir tarefas no board, definir responsáveis pela apresentação e confirmar o acesso do professor/responsável de TI.
-4. Revisar o histórico recente em busca de segredos e garantir que o arquivo local H2 não entre no commit.
+1. Obter a revisão e fazer o merge do PR #4; conferir a execução do Actions no push para `master`.
+2. Concluir a demo de reserva de salas e itens em execução; adicionar/executar teste HTTP de integração se houver tempo.
+3. Confirmar acessos de professor/responsável de TI, atribuir tarefas no board e definir responsáveis pela apresentação.
+4. Verificar Conventional Commits de cada integrante e revisar o histórico em busca de segredos; manter o banco H2 local fora do Git.

@@ -40,3 +40,18 @@ Este arquivo registra as escolhas atuais de implementação do MVP. A equipe dev
 - **Alternativas consideradas:** Executar somente o empacotamento ou depender de verificações manuais locais.
 - **Motivo:** Lint e testes automatizados detectam regressões do back-end de forma consistente.
 - **Consequência:** Só será possível confirmar uma execução remota verde depois que o workflow for enviado e executado no GitHub Actions.
+
+### Proteger a `main` e entregar alterações por Pull Requests revisados
+
+- **Decisão:** Manter a `main` protegida e exigir Pull Requests para alterações no repositório.
+- **Motivo:** A restrição torna visíveis as mudanças da branch e mantém builds, revisão, lint e testes no fluxo de contribuição.
+- **Consequência:** Não será permitido enviar alterações diretamente para `main`; o trabalho deve ficar em uma branch e passar por revisão antes do merge.
+
+## 26 de novembro — Dia 4
+
+### Priorizar a estabilidade do caminho da demo antes de novas funcionalidades
+
+- **Decisão proposta para confirmação da equipe:** Congelar o escopo da apresentação em autenticação e reservas; demonstrar reserva de item com limite de estoque e incluir reservas de sala somente se o fluxo estiver estável.
+- **Adiado para depois do MVP:** Sugestões de horário com IA, interpretação de pedidos em linguagem natural, recorrência, aprovações, integração com inventário oficial e deploy público.
+- **Motivo:** O checklist do Dia 4 prioriza um caminho feliz funcional, repetível e coberto por testes, em vez de ampliar a interface antes da demo.
+- **Estado:** A equipe ainda precisa confirmar o escopo final e o plano B; até lá, tratar esta seção como proposta, não como decisão coletiva concluída.
