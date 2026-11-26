@@ -29,8 +29,7 @@ This checklist tracks MVP stabilization and demo preparation. A checked box mean
 ## 4. Tests and pipeline
 
 - [x] `AuthServiceTest`: 5 tests passed, including correct/incorrect passwords and a malformed stored hash.
-- [x] The last recorded full run before the current changes had 15 passing tests and no Checkstyle violations.
-- [ ] Rerun the full suite and Checkstyle after the current changes; confirm essential tests are not empty.
+- [x] Clean run after the current changes: 17 tests passed and Checkstyle reported 0 violations.
 - [ ] Confirm the latest green GitHub Actions result. The green PR #4 run predates the current local changes.
 - [ ] Evaluate/add an HTTP integration test for the booking lifecycle; there is currently no automated front-end test runner.
 
@@ -48,8 +47,10 @@ This checklist tracks MVP stabilization and demo preparation. A checked box mean
 
 - The local request to `127.0.0.1:8080` was refused because no process was listening on that port. “Failed to fetch” occurs before the API responds; it is not a rejection of the password or sign-up fields.
 - Opening a GitHub branch or `frontend/index.html` does not start the server. For local testing, start Spring Boot from `backend/` and open `http://127.0.0.1:8080` on the same computer. There is no public deployment yet.
-- `AuthServiceTest` passed with 5 tests. The full suite and Checkstyle need to be rerun after the latest changes.
+- The full suite passed with 17 tests and Checkstyle reported 0 violations after the latest changes.
 - The JavaScript connection helper now gives clearer guidance when the API is unreachable. `node --check` could not be run because Node.js is not installed in this environment.
+- `iniciar.bat` was added for double-click back-end startup; actual launcher execution and HTTP flow still need testing.
+- The application now logs `ReservaCampus esta pronto` after completing startup; confirm the message during the first real run.
 - The green PR #4 pipeline run is historical; the current local changes still need a PR and CI.
 
 ## Priority next actions

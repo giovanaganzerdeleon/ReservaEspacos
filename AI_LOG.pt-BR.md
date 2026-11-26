@@ -36,6 +36,6 @@ As entradas descrevem o trabalho assistido por IA neste repositório. O conteúd
 
 - **Ferramenta:** GitHub Copilot no VS Code.
 - **Resumo do prompt:** Investigar o erro “Failed to fetch” no cadastro/login e incorporar o checklist do Dia 4 à documentação do projeto.
-- **Trabalho gerado/assistido:** Confirmada a ausência de um processo escutando em `127.0.0.1:8080`; esclarecido que a branch do GitHub não hospeda a API; adicionada mensagem de conexão mais acionável no front-end; preparados status do Dia 4 em português/inglês e proposta de escopo para a demo.
+- **Trabalho gerado/assistido:** Confirmada a ausência de um processo escutando em `127.0.0.1:8080`; esclarecido que a branch do GitHub não hospeda a API; adicionadas mensagens mais acionáveis no front-end e no terminal, além do iniciador `iniciar.bat`; preparados status do Dia 4 em português/inglês e proposta de escopo para a demo.
 - **Revisão e correções humanas:** Manter a API e o front-end na mesma origem no modo local; não expor o servidor local à rede nem afirmar que há deploy público. O cadastro ao vivo permanece não verificado até o back-end ser iniciado.
-- **Validação:** `AuthServiceTest` passou com 5 testes. `git diff --check` passou. A suíte completa, Checkstyle, fluxo HTTP/navegador e pipeline para as alterações atuais ainda precisam ser executados; `node --check` não estava disponível porque Node.js não está instalado neste ambiente.
+- **Validação:** compilação limpa, Checkstyle (0 violações) e suíte completa (17 testes) passaram. `git diff --check` passou. A inicialização real por `iniciar.bat`, o fluxo HTTP/navegador e a pipeline para as alterações atuais ainda precisam ser verificados; `node --check` não estava disponível porque Node.js não está instalado neste ambiente.

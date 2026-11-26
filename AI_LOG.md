@@ -36,6 +36,6 @@ Entries describe AI-assisted work in this repository. Generated output was revie
 
 - **Tool:** GitHub Copilot in VS Code.
 - **Prompt summary:** Investigate the “Failed to fetch” sign-up/sign-in error and incorporate the Day 4 checklist into the project documentation.
-- **Generated/assisted work:** Confirmed no process was listening on `127.0.0.1:8080`; clarified that a GitHub branch does not host the API; added a more actionable front-end connection error; prepared bilingual Day 4 status files and a proposed demo scope.
+- **Generated/assisted work:** Confirmed no process was listening on `127.0.0.1:8080`; clarified that a GitHub branch does not host the API; added more actionable front-end/terminal messages and the `iniciar.bat` launcher; prepared bilingual Day 4 status files and a proposed demo scope.
 - **Human review and corrections:** Keep the API and front end on the same origin for local use; do not expose the local server to the network or claim a public deployment. Live sign-up remains unverified until the back-end is started.
-- **Validation:** `AuthServiceTest` passed with 5 tests. `git diff --check` passed. The full suite, Checkstyle, HTTP/browser flow, and CI for the current changes still need to run; `node --check` was unavailable because Node.js is not installed in this environment.
+- **Validation:** Clean compilation, Checkstyle (0 violations), and the full suite (17 tests) passed. `git diff --check` passed. Actual startup through `iniciar.bat`, HTTP/browser flow, and CI for the current changes still need verification; `node --check` was unavailable because Node.js is not installed in this environment.
