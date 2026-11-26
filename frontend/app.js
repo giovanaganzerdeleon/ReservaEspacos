@@ -29,10 +29,12 @@ let itemAvailability = [];
 let itemBookings = [];
 let isSignupMode = false;
 
+const API_BASE_URL = "http://localhost:8080";
+
 async function request(url, options = {}) {
-    const response = await fetch(url, {
+    const response = await fetch(`${API_BASE_URL}${url}`, {
         ...options,
-        credentials: "same-origin",
+        credentials: "include",
         headers: {
             ...(options.body ? { "Content-Type": "application/json" } : {}),
             ...options.headers
@@ -41,7 +43,9 @@ async function request(url, options = {}) {
 
     if (!response.ok) {
         const body = await response.json().catch(() => ({}));
-        const error = new Error(body.detail || body.error || "Não foi possível concluir a operação.");
+        const error = new Error(
+            body.detail || body.error || "Não foi possível concluir a operação."
+        );
         error.status = response.status;
         throw error;
     }

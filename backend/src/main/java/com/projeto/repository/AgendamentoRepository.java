@@ -39,4 +39,21 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> 
             @Param("horaFim") LocalTime horaFim,
             @Param("ignorarId") Long ignorarId
     );
+    @Query("""
+        select case when count(reserva) > 0 then true else false end
+        from Agendamento reserva
+        where reserva.usuario.id = :usuarioId
+          and reserva.data = :data
+          and reserva.cancelada = false
+          and reserva.horaInicio < :horaFim
+          and reserva.horaFim > :horaInicio
+          and (:ignorarId is null or reserva.id <> :ignorarId)
+        """)
+boolean existeConflitoDoUsuario(
+        @Param("usuarioId") Long usuarioId,
+        @Param("data") LocalDate data,
+        @Param("horaInicio") LocalTime horaInicio,
+        @Param("horaFim") LocalTime horaFim,
+        @Param("ignorarId") Long ignorarId
+);
 }

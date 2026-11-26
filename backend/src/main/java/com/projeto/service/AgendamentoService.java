@@ -45,6 +45,8 @@ public class AgendamentoService {
         verificarConflito(sala, dados, null);
         Usuario usuario = usuarioRepository.findById(usuarioId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Sessão inválida."));
+                verificarConflitoUsuario(usuarioId, dados, null);
+                
 
         return agendamentoRepository.save(new Agendamento(
                 sala,
@@ -71,6 +73,7 @@ public class AgendamentoService {
             validarSalaDisponivel(sala);
         }
         verificarConflito(sala, dados, agendamentoId);
+        verificarConflitoUsuario(usuarioId, dados, agendamentoId);
 
         agendamento.setSala(sala);
         agendamento.setData(dados.data());
@@ -123,6 +126,20 @@ public class AgendamentoService {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Este horário já está reservado para a sala.");
         }
     }
+    private void verificarConflitoUsuario(Long usuarioId, DadosAgendamento dados, Long ignorarId) {
+    if (agendamentoRepository.existeConflitoDoUsuario(
+            usuarioId,
+            dados.data(),
+            dados.horaInicio(),
+            dados.horaFim(),
+            ignorarId
+    )) {
+        throw new ResponseStatusException(
+                HttpStatus.CONFLICT,
+                "Você já possui uma reserva neste horário."
+        );
+    }
+}
 
     private void verificarProprietario(Agendamento agendamento, Long usuarioId) {
         if (!agendamento.getUsuario().getId().equals(usuarioId)) {
