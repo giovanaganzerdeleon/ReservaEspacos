@@ -1,0 +1,10 @@
+.env
+.env.*
+*.local
+target/
+.idea/
+.vscode/
+*.log
+backend/data/*.mv.db
+backend/data/*.trace.db
+data/
