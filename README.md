@@ -41,10 +41,14 @@ Recurring bookings, campus-system integration, approvals, and AI-generated alter
 ├── README.md
 ├── README.pt-BR.md
 ├── DIA3_STATUS.md
-└── DIA3_STATUS.pt-BR.md
+├── DIA3_STATUS.pt-BR.md
+├── DIA4_STATUS.md
+└── DIA4_STATUS.pt-BR.md
 ```
 
 The back-end serves files from `/frontend` during local development, so the browser and API share an origin. The source remains separated; no front-end package manager is required.
+
+> **Important:** opening `frontend/index.html` directly or viewing a GitHub branch does not start the API. Sign-up and sign-in require the Spring back-end to be running; each person running the app locally must start their own back-end. The application is not hosted for public access yet.
 
 ## Run locally (Windows PowerShell)
 
@@ -78,18 +82,18 @@ cd backend
 .\mvnw.cmd -B checkstyle:check test
 ```
 
-GitHub Actions runs build, Checkstyle, and tests for pull requests and pushes to `master` and `main`. The repository's current default branch is `master`; a green remote Actions run still needs to be confirmed after these changes are pushed.
+GitHub Actions runs build, Checkstyle, and tests for pull requests and pushes to `master` and `main`. PR #4's run passed all three steps. The `main` branch is protected and work is delivered through Pull Requests; confirmation of the `master`/`main` push run after the final merge remains.
 
 ## Team and project links
 
 - **Class:** TDS, mixed groups 6570, 6756, and 6863.
 - **Members listed in the previous team README:** Giovana, Fábio, Theo, and João Raupp; confirm the roster and GitHub handles with the team.
 - **Tech lead / presentation block owners:** to be confirmed by the team; see [`docs/PRESENTATION_OUTLINE.pt-BR.md`](docs/PRESENTATION_OUTLINE.pt-BR.md).
-- **Instructor collaborator:** repository administrator must verify/add `adrianoanschau@gmail.com`.
+- **Instructor collaborator:** `adrianoanschau@gmail.com` has been added to the repository.
 - **Repository:** [giovanaganzerdeleon/ReservaEspacos](https://github.com/giovanaganzerdeleon/ReservaEspacos).
 - **GitHub board:** link and task ownership need to be added by the team.
 - **Deployment:** not configured.
 
 ## Remaining delivery checks
 
-Remote access/board setup, review assignment for the current changes, Conventional Commits from every member, the instructor check-in, and a green GitHub Actions run cannot be asserted from this local worktree. Their current status and next actions are recorded in [`DIA3_STATUS.md`](DIA3_STATUS.md).
+The GitHub board, task ownership, Conventional Commits from every member, live application verification, presentation rehearsal, and the post-merge pipeline run still need confirmation. The instructor has been added to the repository and PR #4's Actions run passed. Current Day 4 status and next actions are recorded in [`DIA4_STATUS.md`](DIA4_STATUS.md).

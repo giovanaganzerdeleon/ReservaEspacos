@@ -40,3 +40,18 @@ This file records the current implementation choices for the MVP. The team shoul
 - **Alternatives considered:** Run only a package build or depend on local manual checks.
 - **Reason:** Automated lint and tests catch back-end regressions consistently.
 - **Trade-off:** A remote green run can only be confirmed after the workflow is pushed and executed in GitHub Actions.
+
+### Protect `main` and deliver changes through reviewed Pull Requests
+
+- **Decision:** Keep `main` protected and require Pull Requests for repository changes.
+- **Reason:** The restriction makes branch changes visible and keeps builds, review, lint, and tests in the contribution workflow.
+- **Trade-off:** Direct pushes to `main` are not permitted; feature work must be committed to a branch and submitted for review before merge.
+
+## 26 November — Day 4
+
+### Stabilize the demo path before adding features
+
+- **Proposed decision for team confirmation:** Freeze the presentation scope around authentication and bookings; demonstrate an item booking with the stock limit, and include room bookings only if that flow is stable.
+- **Deferred beyond the MVP:** AI time suggestions, natural-language booking requests, recurrence, approvals, official inventory integration, and public deployment.
+- **Reason:** The Day 4 checklist prioritizes a working, repeatable happy path with tests over expanding the interface before the demo.
+- **Status:** The team still needs to confirm the final scope and fallback plan; treat this section as a proposal, not a completed team decision.

@@ -105,7 +105,7 @@ async function loadCurrentUser() {
         const user = await request(`${AUTH_URL}/me`);
         showRooms(user);
     } catch (error) {
-        showAuth(error.status === 401 ? "" : "Não foi possível conectar ao servidor. Tente novamente.");
+        showAuth(error.status === 401 ? "" : error.message || "Não foi possível conectar ao servidor. Tente novamente.");
     }
 }
 
@@ -459,7 +459,7 @@ loginForm.addEventListener("submit", async (event) => {
         const user = await request(`${AUTH_URL}/login`, {
             method: "POST",
             body: JSON.stringify({
-                email: document.getElementById("login-email").value,
+                email: document.getElementById("login-email").value.trim(),
                 senha: document.getElementById("login-password").value
             })
         });

@@ -11,7 +11,7 @@ Draft only. The team must assign speakers and rehearse; no presenter names are a
 | 0:00–1:30 | Problem and audience | Booking conflicts on campus; who needs the tool and what the MVP solves. | To be assigned |
 | 1:30–3:00 | Product and architecture | Separate `/frontend` and `/backend`; explain the browser-to-REST flow and local H2. | To be assigned |
 | 3:00–8:00 | Live demo | Sign in; show rooms and the campus-items tab; reserve marker kits or a projector; attempt to reserve more than the remaining stock and show the rejection; edit, list, and cancel. | To be assigned |
-| 8:00–9:30 | Workflow | Show a reviewed Pull Request, Conventional Commit history, and the Actions workflow/run. Do not claim a green run until one exists. | To be assigned |
+| 8:00–9:30 | Workflow | Show PR #4, the Conventional Commit history, and the green Actions run; confirm the status is still current on presentation day. | To be assigned |
 | 9:30–11:00 | Decisions | Explain Java/Spring, separated source directories, sessions, and why recurrence/equipment/approvals are out of MVP scope. | To be assigned |
 | 11:00–13:00 | AI use | Show the AI log; describe generated work and the changes the team reviewed or rejected. | To be assigned |
 | 13:00–15:00 | Status and next steps | Demonstrate local tests, state actual remote pipeline status, mention remaining items and the code-freeze plan. | To be assigned |

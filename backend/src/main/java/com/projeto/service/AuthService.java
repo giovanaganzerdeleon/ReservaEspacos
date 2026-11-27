@@ -47,11 +47,23 @@ public class AuthService {
         Usuario usuario = repository.findByEmailIgnoreCase(emailNormalizado)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "E-mail ou senha incorretos."));
 
-        if (senha == null || !passwordEncoder.matches(senha, usuario.getSenha())) {
+        if (!senhaEstaCorreta(senha, usuario.getSenha())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "E-mail ou senha incorretos.");
         }
 
         return usuario;
+    }
+
+    private boolean senhaEstaCorreta(String senhaInformada, String senhaArmazenada) {
+        if (senhaInformada == null || senhaArmazenada == null) {
+            return false;
+        }
+
+        try {
+            return passwordEncoder.matches(senhaInformada, senhaArmazenada);
+        } catch (IllegalArgumentException exception) {
+            return false;
+        }
     }
 
     public Usuario buscarPorId(Long id) {
