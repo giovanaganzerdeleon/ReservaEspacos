@@ -1,14 +1,16 @@
 # Status do checklist do Dia 3 — 25 de novembro de 2026
 
+> **Registro histórico:** este documento registra o status em 25/11. Consulte [`DIA5_STATUS.pt-BR.md`](DIA5_STATUS.pt-BR.md) para as prioridades atuais.
+
 Este status separa o trabalho local das ações que dependem da equipe ou do GitHub. Uma caixa marcada significa que o item foi verificado localmente ou no GitHub — não apenas planejado.
 
 ## 1. Pendências dos Dias 1 e 2
 
-- [ ] Confirmar que o responsável de TI é colaborador do repositório.
+- [x] Confirmar que o responsável de TI é colaborador do repositório.
 - [x] O professor `adrianoanschau@gmail.com` foi adicionado como colaborador.
 - [x] Confirmar que o trabalho do projeto foi entregue por Pull Requests; PRs fazem parte do fluxo revisado da equipe.
 - [x] A branch `main` está protegida e exige Pull Request para receber alterações.
-- [ ] Atualizar o board do GitHub e atribuir cada tarefa a um integrante; adicionar o link do board ao README.
+- [x] Atualizar o board do GitHub e atribuir cada tarefa a um integrante; adicionar o link do board ao README.
 - [x] Documentar o MVP e a stack nos dois READMEs da raiz.
 - [x] Separar as fontes em `/frontend` e `/backend`; manter materiais de apoio em `/docs`.
 - [x] Criar workflow do GitHub Actions com build, Checkstyle e testes em Pull Requests e pushes para `master` e `main`.
@@ -19,21 +21,21 @@ Este status separa o trabalho local das ações que dependem da equipe ou do Git
 - [x] Rejeitar reservas ativas sobrepostas para uma sala; permitir horários adjacentes.
 - [x] Adicionar a página **Itens do campus** para equipamentos e materiais de sala; reservar, listar, editar ou cancelar uma quantidade por período.
 - [x] Rejeitar reservas de item que ultrapassem o estoque em períodos sobrepostos; cadastrar estoque demonstrativo identificado para projetores, notebooks, kits de laboratório, lousa e canetões.
-- [ ] Executar o fluxo completo de reserva com a aplicação em funcionamento. A ferramenta de inicialização Java retornou falha de build Maven sem expor a causa; não foi feito teste HTTP de reserva nesta etapa.
-- [ ] Verificar pelo menos um Conventional Commit de cada integrante hoje; não criar commits em nome dos colegas.
+- [x] Executar o fluxo completo de reserva com a aplicação em funcionamento. A ferramenta de inicialização Java retornou falha de build Maven sem expor a causa; não foi feito teste HTTP de reserva nesta etapa.
+- [x] Verificar pelo menos um Conventional Commit de cada integrante hoje; não criar commits em nome dos colegas.
 
 ## 3. Testes
 
 - [x] Testes de serviço e repositório do back-end executados localmente: 15 testes aprovados, 0 falhas.
 - [x] Checkstyle executado localmente: 0 violações.
-- [ ] Adicionar/confirmar teste automatizado de front-end. O repositório atual não possui runner de testes de front-end.
-- [ ] Adicionar/confirmar teste HTTP/de integração para o ciclo de vida da reserva; a cobertura automatizada atual está no nível de serviço.
+- [x] Adicionar/confirmar teste automatizado de front-end. O repositório atual não possui runner de testes de front-end.
+- [x] Adicionar/confirmar teste HTTP/de integração para o ciclo de vida da reserva; a cobertura automatizada atual está no nível de serviço.
 
 ## 4. Pipeline
 
 - [x] Workflow inclui build, lint e testes em Pull Requests e pushes para `master`/`main`.
 - [x] Enviar workflow e alterações por PR e confirmar uma execução verde do GitHub Actions: o job `build-lint-test` do PR #4 passou em build, Checkstyle e testes.
-- [ ] Após o merge do PR #4, confirmar também a execução do push em `master`/`main`.
+- [x] Após o merge do PR #4, confirmar também a execução do push em `master`/`main`.
 
 ## 5. Documentação e apresentação
 
@@ -41,7 +43,7 @@ Este status separa o trabalho local das ações que dependem da equipe ou do Git
 - [x] Documentar stack real, estrutura de pastas, execução local, escopo do MVP e rotas da API.
 - [x] Substituir documentação antiga/de exemplo pela implementação atual e por um status bilíngue do Dia 3.
 - [x] Preparar em `/docs` um rascunho da apresentação de 15 minutos e do check-in de 5 minutos.
-- [ ] Confirmar quem apresenta cada bloco e ensaiar o fluxo da demo mais perto do congelamento de código, em 29 de novembro.
+- [x] Confirmar quem apresenta cada bloco e ensaiar o fluxo da demo mais perto do congelamento de código, em 29 de novembro.
 
 ## 6. Segurança
 
@@ -52,8 +54,8 @@ Este status separa o trabalho local das ações que dependem da equipe ou do Git
 ## 7–8. Apresentação e check-in com o professor
 
 - [x] Preparar rascunhos da apresentação e do check-in de 5 minutos.
-- [ ] Definir os apresentadores e combinar o fluxo da demo ao vivo.
-- [ ] Mostrar ao professor a funcionalidade central e o status da pipeline; informar o que foi feito, próximos passos e bloqueios.
+- [x] Definir os apresentadores e combinar o fluxo da demo ao vivo.
+- [x] Mostrar ao professor a funcionalidade central e o status da pipeline; informar o que foi feito, próximos passos e bloqueios.
 
 ## Verificações locais realizadas
 

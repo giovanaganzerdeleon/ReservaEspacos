@@ -2,11 +2,11 @@
 
 [English](README.md) · **Português (Brasil)**
 
-ReservaCampus é um MVP para reservar recursos do campus. O código do front-end é mantido separado do back-end Java com API REST.
+ReservaCampus é um MVP para reservar salas e itens do campus. A aplicação tem uma interface web e uma API REST em Java.
 
 ## Problema e solução
 
-Estudantes e equipes do campus muitas vezes dependem de conversas ou planilhas para encontrar salas e materiais de aula. As informações podem ficar desatualizadas e dois grupos podem planejar usar o mesmo recurso. O ReservaCampus oferece catálogos de salas e itens e permite que usuários autenticados criem, consultem, editem ou cancelem reservas. Reservas de sala não podem se sobrepor; reservas de itens também respeitam o estoque disponível em cada faixa de horário.
+Estudantes e equipes do campus podem depender de conversas ou planilhas para encontrar salas e materiais. Isso dificulta acompanhar a disponibilidade e evitar conflitos. O ReservaCampus oferece catálogos de salas e itens e permite que usuários autenticados criem, consultem, editem ou cancelem reservas. O sistema impede a sobreposição de reservas de sala e limita as reservas de itens ao estoque disponível no período.
 
 ## Escopo do MVP
 
@@ -16,14 +16,14 @@ Estudantes e equipes do campus muitas vezes dependem de conversas ou planilhas p
 - Criar, listar, editar e cancelar as próprias reservas de salas e itens.
 - Impedir sobreposição de reservas de sala e impedir reservas acima do estoque de itens.
 
-Recorrência, integração com sistemas do campus, aprovações e sugestões alternativas geradas por IA ficam fora do MVP atual. As quantidades iniciais dos itens são dados demonstrativos e devem ser ajustadas ao estoque real do campus.
+Recorrência, integração com sistemas oficiais do campus, aprovações e sugestões de horários por IA estão fora do MVP. As quantidades iniciais de itens são apenas demonstrativas, não representam o inventário oficial.
 
 ## Stack
 
 - **Front-end:** HTML, CSS e JavaScript sem framework em `/frontend`; chamadas JSON à API REST.
 - **Back-end:** Java 21, Spring Boot 4.1.2, Spring MVC, Spring Data JPA e Hibernate.
 - **Autenticação:** hash de senha BCrypt e sessões HTTP no servidor.
-- **Banco de dados:** arquivo H2 para desenvolvimento local.
+- **Banco de dados:** H2 em arquivo para desenvolvimento local; cada computador mantém seu próprio banco.
 - **Build e CI:** Maven Wrapper, Checkstyle, JUnit e GitHub Actions.
 
 ## Estrutura do repositório
@@ -44,16 +44,18 @@ Recorrência, integração com sistemas do campus, aprovações e sugestões alt
 ├── DIA3_STATUS.md
 ├── DIA3_STATUS.pt-BR.md
 ├── DIA4_STATUS.md
-└── DIA4_STATUS.pt-BR.md
+├── DIA4_STATUS.pt-BR.md
+├── DIA5_STATUS.md
+└── DIA5_STATUS.pt-BR.md
 ```
 
-Durante o desenvolvimento local, o back-end serve os arquivos de `/frontend`, então navegador e API usam a mesma origem. O código-fonte continua separado e não exige gerenciador de pacotes para o front-end.
+Durante o desenvolvimento local, o back-end serve os arquivos de `/frontend`, então navegador e API usam a mesma origem. O front-end não exige gerenciador de pacotes.
 
-> **Importante:** abrir `frontend/index.html` diretamente ou visualizar uma branch do GitHub não inicia a API. Para cadastro e login, o back-end Spring precisa estar rodando; cada pessoa que executa localmente precisa iniciar o próprio back-end. A aplicação ainda não está hospedada para acesso público.
+> **Importante:** abrir `frontend/index.html` diretamente ou visualizar uma branch do GitHub não inicia a API. Para usar o sistema, inicie o back-end no computador que executará a aplicação. O projeto ainda não está hospedado para acesso público.
 
 ## Executar localmente (Windows)
 
-Pré-requisito: Java 21. O Maven Wrapper baixa o Maven no primeiro uso.
+**Pré-requisito:** Java 21. O Maven Wrapper baixa o Maven no primeiro uso.
 
 1. Na raiz do projeto, clique duas vezes em `iniciar.bat`.
 2. Mantenha a janela do terminal aberta enquanto usa o sistema.
@@ -67,9 +69,11 @@ cd C:\caminho\para\ReservaEspacos\backend
 .\mvnw.cmd spring-boot:run
 ```
 
-Crie uma conta e use as abas **Salas** e **Itens do campus** para gerenciar reservas. Se a tabela de itens estiver vazia, o back-end cadastra itens demonstrativos: projetor, notebooks, kits de laboratório, lousa móvel e kits de canetões. Pare uma instância existente com `Ctrl+C` antes de iniciar outra, pois o H2 embutido bloqueia o arquivo local do banco.
+Crie uma conta pela tela de cadastro e use as abas **Salas** e **Itens do campus**. Quando as respectivas tabelas estiverem vazias, o sistema cadastra quatro salas (Sala 101, Sala 102, Laboratório de Informática e Sala multimídia) e cinco tipos de itens (projetores, notebooks, kits de laboratório, lousa móvel e kits de canetões). As quantidades são ilustrativas; não representam o inventário oficial. O seed não cria conta nem senha padrão.
 
-O banco local fica em `backend/data/`. É específico da máquina e não deve ser enviado ao repositório.
+O banco H2 é criado em `backend/data/` em cada computador. Cada instalação local tem seus próprios usuários, reservas e dados; eles não são sincronizados entre computadores. Não envie esse arquivo ao repositório. Para compartilhar dados entre máquinas, será necessário configurar um banco de dados compartilhado.
+
+Se já houver uma instância usando o banco local, pare-a com `Ctrl+C` antes de iniciar outra.
 
 ## API
 
@@ -83,25 +87,27 @@ As rotas de salas, itens e reservas exigem o cookie de sessão retornado pelo ca
 
 ## Testes e CI
 
-Execute lint e testes localmente:
+Execute Checkstyle e os testes do back-end:
 
 ```powershell
 cd backend
 .\mvnw.cmd -B checkstyle:check test
 ```
 
-O GitHub Actions executa build, Checkstyle e testes em Pull Requests e pushes para `master` e `main`. A execução do PR #4 passou nos três passos. A branch `main` está protegida e exige Pull Request; ainda falta confirmar a execução após o merge final em `master`/`main`.
+O GitHub Actions executa build, Checkstyle e testes em Pull Requests e em pushes para `master` e `main`. Verifique a aba **Actions** para consultar o resultado mais recente. O fluxo de contribuição esperado é abrir um Pull Request, obter revisão e aguardar as verificações antes do merge.
 
 ## Equipe e links
 
 - **Turma:** TDS, turmas mistas 6570, 6756 e 6863.
-- **Integrantes listados no README anterior da equipe:** Giovana, Fábio, Theo e João Raupp; confirmar a lista e os usuários do GitHub com o grupo.
-- **Tech lead / responsáveis pelos blocos da apresentação:** a confirmar pelo grupo; ver [`docs/PRESENTATION_OUTLINE.pt-BR.md`](docs/PRESENTATION_OUTLINE.pt-BR.md).
-- **Colaborador professor:** `adrianoanschau@gmail.com` foi adicionado ao repositório.
+- **Tech lead:** Giovana.
+- **Liderança da apresentação:** Theo.
+- **Roteiro:** ver [`docs/PRESENTATION_OUTLINE.pt-BR.md`](docs/PRESENTATION_OUTLINE.pt-BR.md).
 - **Repositório:** [giovanaganzerdeleon/ReservaEspacos](https://github.com/giovanaganzerdeleon/ReservaEspacos).
-- **Board do GitHub:** o grupo precisa adicionar o link e definir responsáveis pelas tarefas.
-- **Deploy:** ainda não configurado.
+- **Hospedagem pública:** não configurada.
 
-## Verificações restantes da entrega
+## Documentação do projeto
 
-Ainda precisam ser confirmados o board e a atribuição das tarefas, os Conventional Commits de todos os integrantes, a verificação ao vivo da aplicação, o ensaio da apresentação e a execução da pipeline após o merge. O professor já foi adicionado ao repositório e o Actions do PR #4 passou. O status atual do Dia 4 e as próximas ações estão em [`DIA4_STATUS.pt-BR.md`](DIA4_STATUS.pt-BR.md).
+- [Decisões do projeto](DECISIONS.pt-BR.md)
+- [Registro de uso de IA](AI_LOG.pt-BR.md)
+- [Checklist do Dia 5](DIA5_STATUS.pt-BR.md)
+- [Roteiro da apresentação](docs/PRESENTATION_OUTLINE.pt-BR.md)

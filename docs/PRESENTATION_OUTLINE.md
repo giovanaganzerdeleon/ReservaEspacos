@@ -1,36 +1,131 @@
-# 15-minute presentation and 5-minute check-in
+# Presentation Script — ReservaCampus
 
 **English** · [Português (Brasil)](PRESENTATION_OUTLINE.pt-BR.md)
 
-Draft only. The team must assign speakers and rehearse; no presenter names are assumed here.
+A **15-minute presentation**, followed by **5 minutes for questions**. This script describes the current code; adapt the statements to the tests and live run that the team has actually verified.
+
+## Roles
+
+- **Theo — presentation lead:** guides the narrative, keeps time, and handles transitions.
+- **Giovana — tech lead:** explains the architecture and leads the technical demo.
+- **Other teammates:** may take speaking or demo roles; agree on the division and rehearse beforehand.
+
+## Before presenting
+
+- Start the back end on the presentation computer and open `http://127.0.0.1:8080`. The app is not publicly hosted.
+- Create and test a demo account on that computer. The seed does not create an account or default password.
+- Confirm that the local database contains the sample rooms and items. Each seed runs only when its respective table is empty; existing data is not replaced.
+- Choose a future date and confirm item availability for the time window. The sample inventory includes 10 marker kits.
+- Rehearse editing and cancellation. Do not describe a step as demonstrated live if the UI flow has not been verified.
+- Check the latest GitHub Actions run and the commit it covers. Do not present an older run as validation for current changes.
 
 ## 15-minute presentation
 
-| Time | Block | Suggested content | Presenter |
-|---|---|---|---|
-| 0:00–1:30 | Problem and audience | Booking conflicts on campus; who needs the tool and what the MVP solves. | To be assigned |
-| 1:30–3:00 | Product and architecture | Separate `/frontend` and `/backend`; explain the browser-to-REST flow and local H2. | To be assigned |
-| 3:00–8:00 | Live demo | Sign in; show rooms and the campus-items tab; reserve marker kits or a projector; attempt to reserve more than the remaining stock and show the rejection; edit, list, and cancel. | To be assigned |
-| 8:00–9:30 | Workflow | Show PR #4, the Conventional Commit history, and the green Actions run; confirm the status is still current on presentation day. | To be assigned |
-| 9:30–11:00 | Decisions | Explain Java/Spring, separated source directories, sessions, and why recurrence/equipment/approvals are out of MVP scope. | To be assigned |
-| 11:00–13:00 | AI use | Show the AI log; describe generated work and the changes the team reviewed or rejected. | To be assigned |
-| 13:00–15:00 | Status and next steps | Demonstrate local tests, state actual remote pipeline status, mention remaining items and the code-freeze plan. | To be assigned |
+| Time | Block | Suggested lead |
+|---|---|---|
+| 0:00–1:30 | Problem and proposal | Theo introduces the problem and ReservaCampus. |
+| 1:30–3:00 | Product and architecture | Giovana explains the UI, API, authentication, and local database. |
+| 3:00–8:00 | Live demo | Giovana operates the app; Theo narrates the flow and rules. |
+| 8:00–9:30 | Tests and pipeline | Giovana shows verifiable test and CI results. |
+| 9:30–11:00 | Decisions and scope | Theo explains the MVP boundary and deferred work. |
+| 11:00–13:00 | AI use | Theo explains how the team used and reviewed AI tools. |
+| 13:00–15:00 | Wrap-up | Theo summarizes the value, current status, and next steps. |
 
-### Demo preparation
+### 0:00–1:30 — Opening: problem and proposal
 
-- Create a demo account before presenting; do not use a real user's password or expose the local H2 file.
-- Use a future date and a clear time window, for example 09:00–10:00; reserve a quantity of items, then attempt an overlapping reservation that exceeds the remaining stock.
-- Explain that the initial item quantities are demonstration data and must be replaced with a verified campus inventory before real use.
-- Confirm edit, list, and cancellation behavior before the live demo. If live booking verification is not complete, use a clearly labeled local test result instead of claiming the UI flow was verified.
-- Check that only one local app instance is using the H2 file and that the browser is pointed at `http://127.0.0.1:8080`.
+**Suggested script — Theo**
+
+> Good afternoon. We are the ReservaCampus team. Our project addresses a simple problem: finding available rooms and supplies on campus can depend on chats or spreadsheets, which makes scheduling conflicts easy to miss.
+>
+> We built an MVP to browse rooms and items, make bookings, and manage each user's own reservations. We focused on a clear, demonstrable flow and conflict prevention rather than trying to build a complete campus-management system.
+
+### 1:30–3:00 — Product and architecture
+
+**Suggested script — Giovana**
+
+> The interface uses framework-free HTML, CSS, and JavaScript in `frontend/`. The back end uses Java 21 and Spring Boot and exposes a REST API. During local development, Spring also serves the interface, so the browser and API share an origin.
+>
+> Registration and sign-in create a server-side session. Passwords are stored as BCrypt hashes. For development and demos, we use a local H2 file; each computer has its own data, with no synchronization between machines.
+
+**Transition to the demo — Theo**
+
+> Now we will show the main flow running in the application.
+
+### 3:00–8:00 — Live demo
+
+**1. Sign in — Giovana operates; Theo narrates**
+
+> We will sign in with the demo account. After authentication, the app loads the rooms and campus-items areas.
+
+**2. Show the catalog — Giovana**
+
+Briefly show the room list and the **Itens do campus** tab. Point out that the sample data is illustrative, not an official inventory.
+
+**3. Book items — Giovana operates; Theo narrates**
+
+> We will choose a future date and a time window. The app checks availability for that period, not just the total inventory.
+
+Select **Kit de canetões (4 cores)**, choose 09:00–10:00, and book 6 units. Show the booking under **Minhas reservas de itens**. To demonstrate the remaining stock for that same period, enter the same date and time in the availability form again.
+
+> The sample inventory has 10 units. With 6 booked for this period, the screen shows 4 available. The quantity offered by the form follows the availability shown for the selected period.
+
+**4. Edit and cancel — Giovana operates; Theo narrates**
+
+Edit the booking, reduce the quantity to 5, and save. Show the updated booking in the list. Then cancel it and show that its status changes to cancelled.
+
+> The booking belongs to the authenticated account. The back end checks ownership before allowing changes, and cancelled bookings remain recorded with their cancelled status.
+
+**Important:** the UI limits the quantity to the displayed stock. Do not try to force an over-stock quantity to simulate an error. Explain the rule and, if needed, show the relevant automated test rather than claiming the UI made that attempt.
+
+**If the room flow has also been rehearsed:** use any remaining time to create or view a room booking and show **Minhas reservas**. Skip this step if it is not stable.
+
+### 8:00–9:30 — Tests and pipeline
+
+**Suggested script — Giovana**
+
+> The back end has automated tests for rules including authentication, room-booking conflicts, and item-stock availability. We also use Checkstyle to keep the code consistent.
+>
+> This is the GitHub Actions run for commit [identify the commit on screen]. It runs the build, Checkstyle, and tests for pull requests and pushes to `main` and `master`.
+
+Show only results that have actually run. If the run shown does not include the latest changes, say so clearly and distinguish local results from remote CI.
+
+### 9:30–11:00 — Decisions and MVP boundaries
+
+**Suggested script — Theo**
+
+> We prioritized a small MVP that could be demonstrated: a catalog, authentication, and room and item bookings. The system prevents overlapping room bookings. For items, it calculates available stock based on bookings in the same time window.
+>
+> Recurring bookings, approval workflows, integration with the official inventory, and AI-generated time suggestions are outside this MVP. Sample quantities are for demonstration and must be replaced with verified data before operational use.
+
+### 11:00–13:00 — AI use
+
+**Suggested script — Theo**
+
+> We used AI tools to support development and documentation. The team reviewed the suggestions, compared changes with the code, and corrected or rejected work that did not meet the project requirements.
+>
+> AI is not an integrated feature of the current product. Automatic time suggestions were left out of the MVP. Our AI usage and validation are documented in `AI_LOG.md` and `AI_LOG.pt-BR.md`.
+
+Show a concrete entry from the AI log and briefly explain what was accepted and what the team reviewed. Do not attribute decisions to the AI that the team has not confirmed.
+
+### 13:00–15:00 — Wrap-up
+
+**Suggested script — Theo**
+
+> The main result is a local booking flow that lets people browse resources and manage their own reservations, with rules to prevent room conflicts and item bookings from exceeding available stock.
+>
+> This is still a local MVP: demo databases are independent on each computer, and there is no public hosting or official inventory integration. Our next steps are to finish validating the flow, check CI for the delivered commit, and keep the scope stable.
+>
+> Thank you. We are ready for questions.
+
+Replace the next-steps statement with the actual project status on presentation day.
 
 ## 5-minute instructor check-in
 
-| Time | Content |
+| Time | What to show |
 |---|---|
-| 0:00–0:30 | State the campus room-booking problem and the MVP boundary. |
-| 0:30–3:00 | Show sign-in and the room or stock-limited item booking/conflict flow, if live verification has passed. |
-| 3:00–4:00 | Show local test/Checkstyle results and the actual GitHub Actions status. |
-| 4:00–5:00 | Summarize completed work, next steps, and blockers; ask for feedback. |
+| 0:00–0:30 | Theo summarizes the problem, proposal, and MVP boundary. |
+| 0:30–3:00 | Giovana shows sign-in and the item-booking flow; include rooms only if verified. |
+| 3:00–4:00 | Show local test results and the actual GitHub Actions status, identifying the commit. |
+| 4:00–5:00 | Theo summarizes open items, the plan to code freeze, and asks for feedback. |
 
-**Before the check-in:** confirm who will present, push the workflow, and report remote CI status accurately. If Actions has not run yet, say so and show only verified local results.
+**Throughout the presentation:** report only what has been verified. If something has not been tested live or by the current CI run, identify it as outstanding.

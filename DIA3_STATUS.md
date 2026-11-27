@@ -1,5 +1,7 @@
 # Day 3 checklist status — 25 November 2026
 
+> **Historical snapshot:** this document records status on 25 November. See [`DIA5_STATUS.md`](DIA5_STATUS.md) for current priorities.
+
 This status distinguishes local work from actions that need the team or GitHub. A checked box means verified locally or against GitHub; it does not mean merely planned.
 
 ## 1. Days 1–2 follow-up

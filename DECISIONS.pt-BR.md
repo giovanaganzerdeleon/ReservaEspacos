@@ -49,9 +49,23 @@ Este arquivo registra as escolhas atuais de implementação do MVP. A equipe dev
 
 ## 26 de novembro — Dia 4
 
+### Preparar catálogo demonstrativo sem substituir dados existentes
+
+- **Decisão:** Ao iniciar a aplicação, cadastrar quatro salas e os itens demonstrativos existentes somente quando a respectiva tabela estiver vazia.
+- **Motivo:** A equipe pode demonstrar o catálogo sem cadastrar recursos um por um, e os dados já existentes não são sobrescritos.
+- **Consequência:** Nomes e estoques são ilustrativos, não um inventário oficial. O seed não cria usuário nem senha padrão; a conta de demonstração deve ser criada pela tela de cadastro.
+
 ### Priorizar a estabilidade do caminho da demo antes de novas funcionalidades
 
 - **Decisão proposta para confirmação da equipe:** Congelar o escopo da apresentação em autenticação e reservas; demonstrar reserva de item com limite de estoque e incluir reservas de sala somente se o fluxo estiver estável.
 - **Adiado para depois do MVP:** Sugestões de horário com IA, interpretação de pedidos em linguagem natural, recorrência, aprovações, integração com inventário oficial e deploy público.
 - **Motivo:** O checklist do Dia 4 prioriza um caminho feliz funcional, repetível e coberto por testes, em vez de ampliar a interface antes da demo.
 - **Estado:** A equipe ainda precisa confirmar o escopo final e o plano B; até lá, tratar esta seção como proposta, não como decisão coletiva concluída.
+
+## 27 de novembro — Dia 5
+
+### Papéis de liderança da equipe
+
+- **Liderança da apresentação:** Theo coordena o roteiro e o ensaio.
+- **Tech lead:** Giovana conduz as decisões e a preparação técnica.
+- **Observação:** os demais apresentadores e responsáveis por tarefas devem ser definidos pela equipe.

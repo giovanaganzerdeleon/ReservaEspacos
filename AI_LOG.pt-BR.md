@@ -35,7 +35,25 @@ As entradas descrevem o trabalho assistido por IA neste repositório. O conteúd
 ### Diagnóstico do cadastro e preparação do caminho da demo
 
 - **Ferramenta:** GitHub Copilot no VS Code.
-- **Resumo do prompt:** Investigar o erro “Failed to fetch” no cadastro/login e incorporar o checklist do Dia 4 à documentação do projeto.
-- **Trabalho gerado/assistido:** Confirmada a ausência de um processo escutando em `127.0.0.1:8080`; esclarecido que a branch do GitHub não hospeda a API; adicionadas mensagens mais acionáveis no front-end e no terminal, além do iniciador `iniciar.bat`; preparados status do Dia 4 em português/inglês e proposta de escopo para a demo.
-- **Revisão e correções humanas:** Manter a API e o front-end na mesma origem no modo local; não expor o servidor local à rede nem afirmar que há deploy público. O cadastro ao vivo permanece não verificado até o back-end ser iniciado.
-- **Validação:** compilação limpa, Checkstyle (0 violações) e suíte completa (17 testes) passaram. `git diff --check` passou. A inicialização real por `iniciar.bat`, o fluxo HTTP/navegador e a pipeline para as alterações atuais ainda precisam ser verificados; `node --check` não estava disponível porque Node.js não está instalado neste ambiente.
+- **Resumo do prompt:** Investigar falhas de conexão no cadastro/login, preparar o iniciador local e revisar a documentação contra o código e o checklist do Dia 4.
+- **Trabalho gerado/assistido:** Esclarecido que uma branch do GitHub não hospeda a API; adicionadas mensagens acionáveis no front-end e no terminal e o iniciador `iniciar.bat`; implementado seed de quatro salas e itens apenas quando suas respectivas tabelas estão vazias; corrigidas divergências encontradas nos READMEs, status, decisões e roteiro bilíngues.
+- **Revisão e correções humanas:** Manter API e front-end na mesma origem no modo local; não sobrescrever dados existentes, criar senha padrão, expor o servidor local à rede ou afirmar que há deploy público. A inicialização foi confirmada pelo terminal enviado pelo usuário; o fluxo de cadastro/reserva por HTTP continua pendente.
+- **Validação:** `checkstyle:check test` passou com 19 testes e 0 violações, mas o Maven informou `Nothing to compile`; a recompilação limpa ainda precisa ser feita após parar a instância que usa `target`. A porta `8080` foi observada escutando e o terminal mostrou a mensagem de pronto antes da inclusão do seed de salas; reiniciar e conferir os dados. O Actions do PR #6 passou em Build, Lint e Tests no commit `c1e545e`; as alterações locais posteriores ainda não passaram pela pipeline. `node --check` não estava disponível porque Node.js não está instalado neste ambiente.
+
+## 27 de novembro — Dia 5
+
+### Organização da documentação e preparação da apresentação
+
+- **Ferramenta:** GitHub Copilot no VS Code.
+- **Resumo do prompt:** Organizar os arquivos Markdown do projeto para deixá-los mais claros e profissionais e registrar Theo como líder da apresentação e Giovana como tech lead.
+- **Trabalho gerado/assistido:** Simplificação dos READMEs bilíngues, criação de checklists do Dia 5 em português e inglês, atualização do roteiro e registro dos papéis da equipe.
+- **Orientações da equipe aplicadas:** Manter os briefings originais do curso intactos; identificar os status dos Dias 3 e 4 como históricos; deixar tarefas não verificadas desmarcadas; esclarecer que bancos H2 locais não sincronizam entre computadores; registrar Theo como líder da apresentação e Giovana como tech lead.
+- **Validação:** Revisão de consistência dos links e dos papéis nos documentos. Como as alterações são apenas documentais, não foram executados testes de código.
+
+### Roteiro da apresentação baseado no código
+
+- **Ferramenta:** GitHub Copilot no VS Code.
+- **Resumo do prompt:** Montar um roteiro de apresentação fiel ao código atual do ReservaCampus.
+- **Trabalho gerado/assistido:** Roteiro falado de 15 minutos e check-in de 5 minutos, com falas sugeridas, sequência de demonstração e preparação do ambiente.
+- **Revisão:** Conferidos o fluxo da interface, os endpoints e as regras de autenticação, reservas de sala, estoque de itens, cancelamento e pipeline. O roteiro não apresenta a IA como funcionalidade do produto nem sugere uma tentativa de excesso de estoque que a interface limita.
+- **Validação:** Revisão documental baseada no código e nos testes existentes. Nenhum código foi alterado e nenhum teste foi executado nesta etapa.
