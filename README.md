@@ -2,11 +2,11 @@
 
 **English** · [Português (Brasil)](README.pt-BR.md)
 
-ReservaCampus is a campus resource-booking MVP. Its front-end is maintained separately from the Java REST back-end.
+ReservaCampus is an MVP for booking campus rooms and items. It includes a web interface and a Java REST API.
 
 ## Problem and solution
 
-Students and campus teams often depend on chats or spreadsheets to find rooms and classroom materials. Information can be outdated and two groups may plan to use the same resource. ReservaCampus provides room and item catalogs and lets signed-in users create, view, edit, or cancel bookings. Room bookings cannot overlap; item bookings also enforce the available stock quantity for each time window.
+Students and campus teams may depend on chats or spreadsheets to find rooms and classroom materials. This makes availability difficult to track and conflicts easy to miss. ReservaCampus provides room and item catalogs and lets signed-in users create, view, edit, or cancel bookings. The system prevents overlapping room bookings and limits item bookings to available stock for the requested period.
 
 ## MVP scope
 
@@ -16,14 +16,14 @@ Students and campus teams often depend on chats or spreadsheets to find rooms an
 - Create, list, edit, and cancel a user's room and item bookings.
 - Prevent overlapping room bookings and prevent reservations from exceeding item stock.
 
-Recurring bookings, campus-system integration, approvals, and AI-generated alternative slots are outside the current MVP. The initial item quantities are demonstration data and must be adjusted to match the real campus inventory.
+Recurring bookings, integration with official campus systems, approvals, and AI-generated time suggestions are outside the MVP. Initial item quantities are illustrative and do not represent the official inventory.
 
 ## Stack
 
 - **Front-end:** HTML, CSS, and vanilla JavaScript in `/frontend`; JSON requests to the REST API.
 - **Back-end:** Java 21, Spring Boot 4.1.2, Spring MVC, Spring Data JPA, and Hibernate.
 - **Authentication:** BCrypt password hashing and server-side HTTP sessions.
-- **Database:** H2 file database for local development.
+- **Database:** H2 file database for local development; each computer has its own database.
 - **Build and CI:** Maven Wrapper, Checkstyle, JUnit, and GitHub Actions.
 
 ## Repository structure
@@ -34,6 +34,7 @@ Recurring bookings, campus-system integration, approvals, and AI-generated alter
 ├── backend/                  # Spring Boot application and automated tests
 ├── docs/                     # Briefing and presentation/check-in outlines
 ├── frontend/                 # Standalone HTML, CSS, and JavaScript source
+├── iniciar.bat               # Windows double-click launcher for the back-end
 ├── AI_LOG.md
 ├── AI_LOG.pt-BR.md
 ├── DECISIONS.md
@@ -41,23 +42,38 @@ Recurring bookings, campus-system integration, approvals, and AI-generated alter
 ├── README.md
 ├── README.pt-BR.md
 ├── DIA3_STATUS.md
-└── DIA3_STATUS.pt-BR.md
+├── DIA3_STATUS.pt-BR.md
+├── DIA4_STATUS.md
+├── DIA4_STATUS.pt-BR.md
+├── DIA5_STATUS.md
+└── DIA5_STATUS.pt-BR.md
 ```
 
-The back-end serves files from `/frontend` during local development, so the browser and API share an origin. The source remains separated; no front-end package manager is required.
+During local development, the back end serves files from `/frontend`, so the browser and API share an origin. The front end does not require a package manager.
 
-## Run locally (Windows PowerShell)
+> **Important:** opening `frontend/index.html` directly or viewing a GitHub branch does not start the API. Start the back end on the computer that will run the application. The project is not publicly hosted.
 
-Prerequisite: Java 21. The Maven Wrapper downloads Maven on first use.
+## Run locally (Windows)
+
+**Prerequisite:** Java 21. The Maven Wrapper downloads Maven on first use.
+
+1. From the project root, double-click `iniciar.bat`.
+2. Keep the terminal window open while using the app.
+3. Wait for `ReservaCampus esta pronto` to appear in the terminal.
+4. Only then open [http://127.0.0.1:8080](http://127.0.0.1:8080). If the message does not appear, the app has not started; check the terminal error.
+
+If startup fails, the window stays open so you can read the error. To start manually from PowerShell:
 
 ```powershell
-cd backend
-.\mvnw.cmd clean spring-boot:run
+cd C:\path\to\ReservaEspacos\backend
+.\mvnw.cmd spring-boot:run
 ```
 
-Open [http://127.0.0.1:8080](http://127.0.0.1:8080), create an account, and use the **Salas** and **Itens do campus** tabs to manage bookings. If the item table is empty, the back-end seeds demonstration entries for a projector, notebooks, lab kits, a mobile whiteboard, and marker kits. Stop an existing app with `Ctrl+C` before starting another copy because embedded H2 locks its local database file.
+Create an account through the sign-up form, then use the **Salas** and **Itens do campus** tabs. When the respective tables are empty, the application seeds four sample rooms (Sala 101, Sala 102, Laboratório de Informática, and Sala multimídia) and five types of items (projectors, notebooks, lab kits, a mobile whiteboard, and marker kits). Quantities are illustrative and do not represent the official inventory. The seed does not create an account or default password.
 
-The local database is stored under `backend/data/`. It is machine-specific and must not be committed.
+The H2 database is created under `backend/data/` on each computer. Each local installation has its own users, bookings, and data; they are not synchronized between computers. Do not commit this database file. Sharing data across computers requires configuring a shared database.
+
+If an application instance is already using the local database, stop it with `Ctrl+C` before starting another.
 
 ## API
 
@@ -71,25 +87,27 @@ Room, item, and booking routes require the session cookie returned by registrati
 
 ## Tests and CI
 
-Run local lint and tests:
+Run Checkstyle and the back-end tests:
 
 ```powershell
 cd backend
 .\mvnw.cmd -B checkstyle:check test
 ```
 
-GitHub Actions runs build, Checkstyle, and tests for pull requests and pushes to `master` and `main`. The repository's current default branch is `master`; a green remote Actions run still needs to be confirmed after these changes are pushed.
+GitHub Actions runs the build, Checkstyle, and tests for pull requests and pushes to `master` and `main`. Check the **Actions** tab for the latest result. The expected contribution flow is to open a pull request, get it reviewed, and wait for checks before merging.
 
 ## Team and project links
 
 - **Class:** TDS, mixed groups 6570, 6756, and 6863.
-- **Members listed in the previous team README:** Giovana, Fábio, Theo, and João Raupp; confirm the roster and GitHub handles with the team.
-- **Tech lead / presentation block owners:** to be confirmed by the team; see [`docs/PRESENTATION_OUTLINE.pt-BR.md`](docs/PRESENTATION_OUTLINE.pt-BR.md).
-- **Instructor collaborator:** repository administrator must verify/add `adrianoanschau@gmail.com`.
+- **Tech lead:** Giovana.
+- **Presentation lead:** Theo.
+- **Presentation outline:** see [`docs/PRESENTATION_OUTLINE.md`](docs/PRESENTATION_OUTLINE.md).
 - **Repository:** [giovanaganzerdeleon/ReservaEspacos](https://github.com/giovanaganzerdeleon/ReservaEspacos).
-- **GitHub board:** link and task ownership need to be added by the team.
-- **Deployment:** not configured.
+- **Public hosting:** not configured.
 
-## Remaining delivery checks
+## Project documentation
 
-Remote access/board setup, review assignment for the current changes, Conventional Commits from every member, the instructor check-in, and a green GitHub Actions run cannot be asserted from this local worktree. Their current status and next actions are recorded in [`DIA3_STATUS.md`](DIA3_STATUS.md).
+- [Project decisions](DECISIONS.md)
+- [AI usage log](AI_LOG.md)
+- [Day 5 checklist](DIA5_STATUS.md)
+- [Presentation outline](docs/PRESENTATION_OUTLINE.md)

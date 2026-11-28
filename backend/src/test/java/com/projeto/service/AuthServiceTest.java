@@ -53,6 +53,29 @@ class AuthServiceTest {
     }
 
     @Test
+    void autenticarDeveAceitarSenhaCorreta() {
+        String hash = new BCryptPasswordEncoder().encode("senha-segura");
+        Usuario usuario = new Usuario("Ana", "ana@example.com", hash);
+        when(repository.findByEmailIgnoreCase("ana@example.com"))
+                .thenReturn(Optional.of(usuario));
+
+        Usuario autenticado = service.autenticar(" Ana@Example.com ", "senha-segura");
+
+        assertThat(autenticado).isSameAs(usuario);
+    }
+
+    @Test
+    void autenticarDeveRejeitarHashInvalidoSemErroInterno() {
+        Usuario usuario = new Usuario("Ana", "ana@example.com", "hash-antigo-invalido");
+        when(repository.findByEmailIgnoreCase("ana@example.com"))
+                .thenReturn(Optional.of(usuario));
+
+        assertThatThrownBy(() -> service.autenticar("ana@example.com", "senha-segura"))
+                .isInstanceOf(ResponseStatusException.class)
+                .hasMessageContaining("E-mail ou senha incorretos");
+    }
+
+    @Test
     void cadastrarDeveRejeitarSenhaCurta() {
         assertThatThrownBy(() -> service.cadastrar("Ana", "ana@example.com", "123"))
                 .isInstanceOf(ResponseStatusException.class)

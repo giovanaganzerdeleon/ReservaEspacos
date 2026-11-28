@@ -40,3 +40,32 @@ This file records the current implementation choices for the MVP. The team shoul
 - **Alternatives considered:** Run only a package build or depend on local manual checks.
 - **Reason:** Automated lint and tests catch back-end regressions consistently.
 - **Trade-off:** A remote green run can only be confirmed after the workflow is pushed and executed in GitHub Actions.
+
+### Protect `main` and deliver changes through reviewed Pull Requests
+
+- **Decision:** Keep `main` protected and require Pull Requests for repository changes.
+- **Reason:** The restriction makes branch changes visible and keeps builds, review, lint, and tests in the contribution workflow.
+- **Trade-off:** Direct pushes to `main` are not permitted; feature work must be committed to a branch and submitted for review before merge.
+
+## 26 November — Day 4
+
+### Prepare a demo catalog without replacing existing data
+
+- **Decision:** On startup, seed four rooms and the existing sample items only when their respective tables are empty.
+- **Reason:** The team can demonstrate the catalog without entering resources one by one, and existing data is not overwritten.
+- **Trade-off:** Names and stock counts are illustrative, not an official inventory. The seed does not create a user or default password; create the demo account through sign-up.
+
+### Stabilize the demo path before adding features
+
+- **Proposed decision for team confirmation:** Freeze the presentation scope around authentication and bookings; demonstrate an item booking with the stock limit, and include room bookings only if that flow is stable.
+- **Deferred beyond the MVP:** AI time suggestions, natural-language booking requests, recurrence, approvals, official inventory integration, and public deployment.
+- **Reason:** The Day 4 checklist prioritizes a working, repeatable happy path with tests over expanding the interface before the demo.
+- **Status:** The team still needs to confirm the final scope and fallback plan; treat this section as a proposal, not a completed team decision.
+
+## 27 November — Day 5
+
+### Team leadership roles
+
+- **Presentation lead:** Theo coordinates the outline and rehearsal.
+- **Tech lead:** Giovana leads technical decisions and preparation.
+- **Note:** the team should assign the remaining speakers and task owners.
