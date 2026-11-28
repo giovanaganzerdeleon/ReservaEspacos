@@ -23,7 +23,7 @@ Recurring bookings, integration with official campus systems, approvals, and AI-
 - **Front-end:** HTML, CSS, and vanilla JavaScript in `/frontend`; JSON requests to the REST API.
 - **Back-end:** Java 21, Spring Boot 4.1.2, Spring MVC, Spring Data JPA, and Hibernate.
 - **Authentication:** BCrypt password hashing and server-side HTTP sessions.
-- **Database:** H2 file database for local development; each computer has its own database.
+- **Database:** H2 locally; a Railway demo deployment with PostgreSQL is prepared but not yet published.
 - **Build and CI:** Maven Wrapper, Checkstyle, JUnit, and GitHub Actions.
 
 ## Repository structure
@@ -51,7 +51,7 @@ Recurring bookings, integration with official campus systems, approvals, and AI-
 
 During local development, the back end serves files from `/frontend`, so the browser and API share an origin. The front end does not require a package manager.
 
-> **Important:** opening `frontend/index.html` directly or viewing a GitHub branch does not start the API. Start the back end on the computer that will run the application. The project is not publicly hosted.
+> **Important:** opening `frontend/index.html` directly or viewing a GitHub branch does not start the API. For local use, the back end must be running. Once hosted, the presentation computer only needs a browser and internet access. Deployment has not been completed; see [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 
 ## Run locally (Windows)
 
@@ -101,6 +101,7 @@ GitHub Actions runs the build, Checkstyle, and tests for pull requests and pushe
 - **Class:** TDS, mixed groups 6570, 6756, and 6863.
 - **Tech lead:** Giovana.
 - **Presentation lead:** Theo.
+- **Presentation team:** Theo, Fábio, and Giovana.
 - **Presentation outline:** see [`docs/PRESENTATION_OUTLINE.md`](docs/PRESENTATION_OUTLINE.md).
 - **Repository:** [giovanaganzerdeleon/ReservaEspacos](https://github.com/giovanaganzerdeleon/ReservaEspacos).
 - **Public hosting:** not configured.
@@ -111,3 +112,4 @@ GitHub Actions runs the build, Checkstyle, and tests for pull requests and pushe
 - [AI usage log](AI_LOG.md)
 - [Day 5 checklist](DIA5_STATUS.md)
 - [Presentation outline](docs/PRESENTATION_OUTLINE.md)
+- [Demo deployment guide](docs/DEPLOYMENT.md)

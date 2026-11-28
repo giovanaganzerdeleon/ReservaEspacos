@@ -12,6 +12,7 @@ Check an item only after it has been completed and verified. Record an owner and
 - [ ] Confirm which features are in the presentation and which are out; record the decision in `DECISIONS.md`.
 - [ ] Confirm that sample rooms and items are available on the presentation computer.
 - [ ] Prepare a demo account on that computer; do not use a personal account or password.
+- [ ] If the presentation uses a hosted version, test its URL on the presentation computer and confirm access to the demo database.
 - [ ] Define and rehearse a fallback for network, server, or live-demo failures.
 
 ## 2. Keep the main branch stable
@@ -49,7 +50,8 @@ Check an item only after it has been completed and verified. Record an owner and
 
 - **Presentation lead:** Theo.
 - **Tech lead:** Giovana.
-- **Other task and speaking owners:** agree as a team.
+- **Live demo and AI-use log:** Fábio.
+- **Presentation team:** Theo, Fábio, and Giovana.
 
 ## Progress tracking
 

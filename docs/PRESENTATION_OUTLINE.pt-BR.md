@@ -7,12 +7,15 @@ Apresentação de **15 minutos**, seguida de **5 minutos para perguntas**. Este 
 ## Papéis
 
 - **Theo — líder da apresentação:** conduz a narrativa, controla o tempo e faz as transições.
-- **Giovana — tech lead:** explica a arquitetura e conduz a demonstração técnica.
-- **Demais integrantes:** podem assumir falas ou etapas da demo; combinem e ensaiem a divisão antes da apresentação.
+- **Giovana — tech lead:** explica a arquitetura, as regras do back-end e os testes.
+- **Fábio:** conduz a navegação e as ações da demonstração ao vivo.
+
+Esta é uma divisão sugerida: Theo apresenta e conecta os blocos; Fábio opera a interface; Giovana complementa com as explicações técnicas. Ensaiem as transições entre os três.
 
 ## Antes de apresentar
 
-- Iniciem o back-end no computador da apresentação e abram `http://127.0.0.1:8080`. O sistema ainda não está hospedado publicamente.
+- Se o deploy estiver concluído, abram a URL HTTPS do host no computador da apresentação; nesse computador não é necessário instalar Java ou Maven.
+- Se ainda não houver deploy, a alternativa local exige Java 21 no computador que executa o back-end e acesso a `http://127.0.0.1:8080`.
 - Criem e testem uma conta de demonstração nesse computador. O seed não cria conta nem senha padrão.
 - Confirmem que o banco local tem as salas e os itens de exemplo. O seed só popula cada catálogo quando a tabela correspondente está vazia; ele não substitui dados existentes.
 - Escolham uma data futura e confirmem o estoque disponível para o período. O exemplo inicial inclui 10 kits de canetões.
@@ -25,10 +28,10 @@ Apresentação de **15 minutos**, seguida de **5 minutos para perguntas**. Este 
 |---|---|---|
 | 0:00–1:30 | Problema e proposta | Theo apresenta o problema e o objetivo do ReservaCampus. |
 | 1:30–3:00 | Produto e arquitetura | Giovana explica a interface, API, autenticação e banco local. |
-| 3:00–8:00 | Demonstração | Giovana opera o sistema; Theo narra o fluxo e contextualiza as regras. |
+| 3:00–8:00 | Demonstração | Fábio opera o sistema; Theo narra o fluxo; Giovana explica as regras técnicas. |
 | 8:00–9:30 | Testes e pipeline | Giovana mostra resultados verificáveis de testes e CI. |
 | 9:30–11:00 | Decisões e limites | Theo explica o recorte do MVP e o que ficou para depois. |
-| 11:00–13:00 | Uso de IA | Theo explica como a equipe usou e revisou ferramentas de IA. |
+| 11:00–13:00 | Uso de IA | Fábio apresenta o registro coletivo de uso e revisão de IA. |
 | 13:00–15:00 | Fechamento | Theo resume o valor, o estado atual e os próximos passos. |
 
 ### 0:00–1:30 — Abertura: problema e proposta
@@ -45,7 +48,7 @@ Apresentação de **15 minutos**, seguida de **5 minutos para perguntas**. Este 
 
 > A interface foi feita com HTML, CSS e JavaScript, sem framework, em `frontend/`. O back-end usa Java 21 e Spring Boot, e expõe uma API REST. Durante a execução local, o Spring também serve a interface, então o navegador e a API usam a mesma origem.
 >
-> O cadastro e o login criam uma sessão no servidor. As senhas são armazenadas com hash BCrypt. Para desenvolvimento e demonstração, usamos um arquivo H2 local; cada computador tem seus próprios dados, sem sincronização entre máquinas.
+> O cadastro e o login criam uma sessão no servidor. As senhas são armazenadas com hash BCrypt. No desenvolvimento local, usamos H2. Para hospedar a demonstração, preparamos um perfil que usa PostgreSQL; nesse caso, as pessoas acessam a mesma aplicação e o mesmo banco pela URL do host.
 
 **Transição para a demo — Theo**
 
@@ -53,15 +56,15 @@ Apresentação de **15 minutos**, seguida de **5 minutos para perguntas**. Este 
 
 ### 3:00–8:00 — Demonstração ao vivo
 
-**1. Entrar — Giovana opera; Theo narra**
+**1. Entrar — Fábio opera; Theo narra**
 
 > Vamos entrar com a conta de demonstração. Depois da autenticação, o sistema carrega as áreas de salas e itens do campus.
 
-**2. Mostrar o catálogo — Giovana**
+**2. Mostrar o catálogo — Fábio**
 
 Mostre brevemente a lista de salas e a aba **Itens do campus**. Aponte que os dados iniciais são demonstrativos, não um inventário oficial.
 
-**3. Reservar itens — Giovana opera; Theo narra**
+**3. Reservar itens — Fábio opera; Theo narra; Giovana explica a regra**
 
 > Vamos escolher uma data futura e um intervalo de horário. O sistema consulta a disponibilidade daquele período, não apenas o estoque total.
 
@@ -69,7 +72,7 @@ Selecione o **Kit de canetões (4 cores)**, escolha 09:00–10:00 e reserve 6 un
 
 > O catálogo tem 10 unidades demonstrativas. Com 6 reservadas nesse intervalo, a tela informa que restam 4 disponíveis. A quantidade oferecida no formulário acompanha essa disponibilidade.
 
-**4. Editar e cancelar — Giovana opera; Theo narra**
+**4. Editar e cancelar — Fábio opera; Theo narra**
 
 Edite a reserva, reduza a quantidade para 5 e salve. Mostre a atualização na lista. Em seguida, cancele a reserva e mostre que ela passa a constar como cancelada.
 
@@ -99,32 +102,32 @@ Mostre apenas resultados que tenham sido realmente executados. Se a execução e
 
 ### 11:00–13:00 — Uso de IA
 
-**Fala sugerida — Theo**
+**Fala sugerida — Fábio**
 
 > Usamos ferramentas de IA como apoio ao desenvolvimento e à documentação. A equipe revisou as sugestões, comparou mudanças com o código e corrigiu ou descartou o que não atendia às regras do projeto.
 >
 > A IA não é uma funcionalidade integrada ao produto atual. As sugestões automáticas de horários ficaram fora do MVP. Registramos o uso e as validações no `AI_LOG.md` e no `AI_LOG.pt-BR.md`.
 
-Mostre um exemplo concreto do registro de IA e explique brevemente o que foi aceito e o que foi revisado. Não atribua à IA decisões que a equipe não tenha confirmado.
+Mostre um exemplo concreto do registro de IA e explique brevemente o que a equipe aceitou e revisou. Fábio apresenta o uso coletivo; não atribua a ele contribuições individuais que não tenham sido confirmadas.
 
 ### 13:00–15:00 — Fechamento
 
 **Fala sugerida — Theo**
 
-> O principal resultado é um fluxo local de reserva que permite consultar recursos e administrar as próprias reservas, com regras para evitar conflitos de sala e excesso de reservas de itens.
+> O principal resultado é um fluxo de reserva que permite consultar recursos e administrar as próprias reservas, com regras para evitar conflitos de sala e excesso de reservas de itens.
 >
-> O sistema ainda é um MVP local: os bancos de demonstração são independentes em cada computador e não há hospedagem pública nem integração com inventário oficial. Nosso próximo passo é finalizar a validação do fluxo, conferir a pipeline para o commit entregue e manter o escopo estável.
+> Este ainda é um MVP, sem integração com inventário oficial. Nosso próximo passo é finalizar a validação do fluxo, conferir a pipeline para o commit entregue e manter o escopo estável.
 >
 > Obrigado. Estamos prontos para as perguntas.
 
-Substituam a última frase sobre próximos passos pelo estado real do projeto no dia da apresentação.
+**Ajustem esta informação conforme o status no dia:** se a demo estiver hospedada, digam que está disponível pela URL e usa dados de demonstração; caso contrário, informem que o acesso por URL pública continua pendente.
 
 ## Check-in de 5 minutos com o professor
 
 | Tempo | O que mostrar |
 |---|---|
 | 0:00–0:30 | Theo resume o problema, a proposta e o limite do MVP. |
-| 0:30–3:00 | Giovana mostra login e a reserva de itens; inclua salas somente se o fluxo estiver validado. |
+| 0:30–3:00 | Fábio opera login e reserva de itens; Giovana explica as regras técnicas. Inclua salas somente se o fluxo estiver validado. |
 | 3:00–4:00 | Mostrar testes locais e o status real do GitHub Actions, identificando o commit. |
 | 4:00–5:00 | Theo apresenta pendências, plano até o congelamento e solicita feedback. |
 

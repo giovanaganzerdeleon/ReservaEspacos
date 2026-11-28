@@ -23,7 +23,7 @@ Recorrência, integração com sistemas oficiais do campus, aprovações e suges
 - **Front-end:** HTML, CSS e JavaScript sem framework em `/frontend`; chamadas JSON à API REST.
 - **Back-end:** Java 21, Spring Boot 4.1.2, Spring MVC, Spring Data JPA e Hibernate.
 - **Autenticação:** hash de senha BCrypt e sessões HTTP no servidor.
-- **Banco de dados:** H2 em arquivo para desenvolvimento local; cada computador mantém seu próprio banco.
+- **Banco de dados:** H2 localmente; deploy de demonstração no Railway preparado com PostgreSQL, ainda não publicado.
 - **Build e CI:** Maven Wrapper, Checkstyle, JUnit e GitHub Actions.
 
 ## Estrutura do repositório
@@ -51,7 +51,7 @@ Recorrência, integração com sistemas oficiais do campus, aprovações e suges
 
 Durante o desenvolvimento local, o back-end serve os arquivos de `/frontend`, então navegador e API usam a mesma origem. O front-end não exige gerenciador de pacotes.
 
-> **Importante:** abrir `frontend/index.html` diretamente ou visualizar uma branch do GitHub não inicia a API. Para usar o sistema, inicie o back-end no computador que executará a aplicação. O projeto ainda não está hospedado para acesso público.
+> **Importante:** abrir `frontend/index.html` diretamente ou visualizar uma branch do GitHub não inicia a API. Na execução local, o back-end também precisa estar iniciado. Depois de hospedar a aplicação, o computador de apresentação precisa apenas de navegador e internet. O deploy ainda não foi realizado; veja [`docs/DEPLOYMENT.pt-BR.md`](docs/DEPLOYMENT.pt-BR.md).
 
 ## Executar localmente (Windows)
 
@@ -101,6 +101,7 @@ O GitHub Actions executa build, Checkstyle e testes em Pull Requests e em pushes
 - **Turma:** TDS, turmas mistas 6570, 6756 e 6863.
 - **Tech lead:** Giovana.
 - **Liderança da apresentação:** Theo.
+- **Equipe de apresentação:** Theo, Fábio e Giovana.
 - **Roteiro:** ver [`docs/PRESENTATION_OUTLINE.pt-BR.md`](docs/PRESENTATION_OUTLINE.pt-BR.md).
 - **Repositório:** [giovanaganzerdeleon/ReservaEspacos](https://github.com/giovanaganzerdeleon/ReservaEspacos).
 - **Hospedagem pública:** não configurada.
@@ -111,3 +112,4 @@ O GitHub Actions executa build, Checkstyle e testes em Pull Requests e em pushes
 - [Registro de uso de IA](AI_LOG.pt-BR.md)
 - [Checklist do Dia 5](DIA5_STATUS.pt-BR.md)
 - [Roteiro da apresentação](docs/PRESENTATION_OUTLINE.pt-BR.md)
+- [Guia de hospedagem da demonstração](docs/DEPLOYMENT.pt-BR.md)

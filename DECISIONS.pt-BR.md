@@ -68,4 +68,11 @@ Este arquivo registra as escolhas atuais de implementação do MVP. A equipe dev
 
 - **Liderança da apresentação:** Theo coordena o roteiro e o ensaio.
 - **Tech lead:** Giovana conduz as decisões e a preparação técnica.
-- **Observação:** os demais apresentadores e responsáveis por tarefas devem ser definidos pela equipe.
+- **Equipe de apresentação:** Theo, Fábio e Giovana. Fábio conduz a demonstração ao vivo.
+
+### Preparar hospedagem para a demonstração
+
+- **Decisão:** Preparar o deploy da demonstração no Railway com Java 21 e PostgreSQL, mantendo H2 para execução local.
+- **Motivo:** O computador da apresentação poderá acessar o sistema pelo navegador sem instalar Java ou Maven.
+- **Preparação:** `Dockerfile` na raiz para compilar e executar o JAR, `.dockerignore` para excluir arquivos locais, perfil `prod` e instruções bilíngues de deploy.
+- **Estado e limites:** A preparação foi adicionada, mas o deploy ainda não foi realizado. O perfil é para demonstração; antes de uso público com dados reais, são necessários controles adicionais de segurança, migrações e backups. Verificar os preços do Railway antes de criar os serviços.

@@ -12,6 +12,7 @@ Marque um item somente depois de concluído e validado. Registre o responsável 
 - [ ] Confirmar quais funcionalidades entram na apresentação e quais ficam fora; registrar a decisão em `DECISIONS.pt-BR.md`.
 - [ ] Confirmar que salas e itens demonstrativos estão disponíveis no computador da apresentação.
 - [ ] Preparar a conta de demonstração nesse computador; não usar conta ou senha pessoal.
+- [ ] Se a apresentação usar uma versão hospedada, testar a URL no computador de apresentação e confirmar o acesso ao banco de demonstração.
 - [ ] Definir e ensaiar um plano B para falha de rede, servidor ou demonstração ao vivo.
 
 ## 2. Manter a branch principal estável
@@ -49,7 +50,8 @@ Marque um item somente depois de concluído e validado. Registre o responsável 
 
 - **Liderança da apresentação:** Theo.
 - **Tech lead:** Giovana.
-- **Demais responsáveis pelas tarefas e falas:** definir com a equipe.
+- **Demonstração ao vivo e registro de uso de IA:** Fábio.
+- **Equipe de apresentação:** Theo, Fábio e Giovana.
 
 ## Registro de acompanhamento
 

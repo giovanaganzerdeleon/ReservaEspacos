@@ -49,6 +49,7 @@ Entries describe AI-assisted work in this repository. Generated output was revie
 - **Generated/assisted work:** Simplified the bilingual READMEs, added Day 5 checklists in English and Portuguese, updated the presentation outline, and recorded the team roles.
 - **Team guidance applied:** Preserved the original course briefings; labeled Day 3 and Day 4 status files as historical; left unverified tasks unchecked; clarified that local H2 databases do not synchronize across computers; recorded Theo as presentation lead and Giovana as tech lead.
 - **Validation:** Reviewed link consistency and role references across the documentation. No code tests were run because the changes are documentation-only.
+- **Team update:** After the user confirmed the presentation team, Fábio was added as a presenter and assigned the live demo and the shared AI-use log.
 
 ### Code-based presentation script
 
@@ -57,3 +58,11 @@ Entries describe AI-assisted work in this repository. Generated output was revie
 - **Generated/assisted work:** Added a spoken 15-minute presentation and 5-minute instructor check-in, with suggested dialogue, demo sequence, and setup guidance.
 - **Review:** Checked the UI flow, endpoints, and rules for authentication, room bookings, item stock, cancellation, and CI. The script does not claim AI is a product feature or suggest an over-stock attempt that the UI limits.
 - **Validation:** Documentation review based on the code and existing tests. No code was changed and no tests were run in this step.
+
+### Preparing to host the demo
+
+- **Tool:** GitHub Copilot in VS Code.
+- **Prompt summary:** Prepare the project for Railway deployment so the presentation computer can access the MVP in a browser without installing Java or Maven.
+- **Generated/assisted work:** Added a PostgreSQL hosting profile, packaged front-end files into the JAR, added a root `Dockerfile`, excluded local files with `.dockerignore`, and wrote bilingual Railway deployment instructions.
+- **Review and limits:** Retained H2 and the local configuration; credentials are supplied through environment variables; the H2 console and verbose SQL are disabled in the hosting profile. This is for a demo, does not complete deployment, and is not a production-readiness guarantee.
+- **Validation:** `.\mvnw.cmd -B package` passed with 19 tests; `.\mvnw.cmd -B checkstyle:check` passed with 0 violations. The JAR was inspected and contains the static files, the `prod` profile, and the PostgreSQL driver. The Dockerfile uses the Maven Wrapper and runs the tests during image build. PostgreSQL connectivity and deployment were not tested because Railway services are not configured yet.

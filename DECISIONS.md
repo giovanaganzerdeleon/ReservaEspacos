@@ -68,4 +68,11 @@ This file records the current implementation choices for the MVP. The team shoul
 
 - **Presentation lead:** Theo coordinates the outline and rehearsal.
 - **Tech lead:** Giovana leads technical decisions and preparation.
-- **Note:** the team should assign the remaining speakers and task owners.
+- **Presentation team:** Theo, Fábio, and Giovana. Fábio leads the live demo.
+
+### Prepare hosting for the demo
+
+- **Decision:** Prepare the demo deployment on Railway with Java 21 and PostgreSQL while retaining H2 for local development.
+- **Reason:** The presentation computer can access the application in a browser without installing Java or Maven.
+- **Preparation:** A root `Dockerfile` builds and runs the JAR, `.dockerignore` excludes local files, and the repository includes a `prod` profile and bilingual deployment instructions.
+- **Status and limits:** The preparation has been added, but the app has not been deployed. The profile is intended for a demo; additional security controls, migrations, and backups are needed before public use with real data. Check Railway pricing before creating services.

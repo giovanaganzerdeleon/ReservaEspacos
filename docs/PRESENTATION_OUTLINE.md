@@ -7,12 +7,15 @@ A **15-minute presentation**, followed by **5 minutes for questions**. This scri
 ## Roles
 
 - **Theo — presentation lead:** guides the narrative, keeps time, and handles transitions.
-- **Giovana — tech lead:** explains the architecture and leads the technical demo.
-- **Other teammates:** may take speaking or demo roles; agree on the division and rehearse beforehand.
+- **Giovana — tech lead:** explains the architecture, back-end rules, and tests.
+- **Fábio:** leads the live demo, operating the interface and walking through the user flow.
+
+This is the suggested division: Theo presents and connects the sections; Fábio operates the UI; Giovana adds the technical explanations. Rehearse the transitions between all three.
 
 ## Before presenting
 
-- Start the back end on the presentation computer and open `http://127.0.0.1:8080`. The app is not publicly hosted.
+- If deployment is complete, open the host's HTTPS URL on the presentation computer; Java and Maven are not needed on that computer.
+- If deployment is not ready, the local fallback requires Java 21 on the computer running the back end and uses `http://127.0.0.1:8080`.
 - Create and test a demo account on that computer. The seed does not create an account or default password.
 - Confirm that the local database contains the sample rooms and items. Each seed runs only when its respective table is empty; existing data is not replaced.
 - Choose a future date and confirm item availability for the time window. The sample inventory includes 10 marker kits.
@@ -25,10 +28,10 @@ A **15-minute presentation**, followed by **5 minutes for questions**. This scri
 |---|---|---|
 | 0:00–1:30 | Problem and proposal | Theo introduces the problem and ReservaCampus. |
 | 1:30–3:00 | Product and architecture | Giovana explains the UI, API, authentication, and local database. |
-| 3:00–8:00 | Live demo | Giovana operates the app; Theo narrates the flow and rules. |
+| 3:00–8:00 | Live demo | Fábio operates the app; Theo narrates the flow; Giovana explains the technical rules. |
 | 8:00–9:30 | Tests and pipeline | Giovana shows verifiable test and CI results. |
 | 9:30–11:00 | Decisions and scope | Theo explains the MVP boundary and deferred work. |
-| 11:00–13:00 | AI use | Theo explains how the team used and reviewed AI tools. |
+| 11:00–13:00 | AI use | Fábio presents the team's shared AI-use log. |
 | 13:00–15:00 | Wrap-up | Theo summarizes the value, current status, and next steps. |
 
 ### 0:00–1:30 — Opening: problem and proposal
@@ -45,7 +48,7 @@ A **15-minute presentation**, followed by **5 minutes for questions**. This scri
 
 > The interface uses framework-free HTML, CSS, and JavaScript in `frontend/`. The back end uses Java 21 and Spring Boot and exposes a REST API. During local development, Spring also serves the interface, so the browser and API share an origin.
 >
-> Registration and sign-in create a server-side session. Passwords are stored as BCrypt hashes. For development and demos, we use a local H2 file; each computer has its own data, with no synchronization between machines.
+> Registration and sign-in create a server-side session. Passwords are stored as BCrypt hashes. Local development uses H2. For a hosted demo, we prepared a profile that uses PostgreSQL; in that case, people access the same application and database through the host URL.
 
 **Transition to the demo — Theo**
 
@@ -53,23 +56,23 @@ A **15-minute presentation**, followed by **5 minutes for questions**. This scri
 
 ### 3:00–8:00 — Live demo
 
-**1. Sign in — Giovana operates; Theo narrates**
+**1. Sign in — Fábio operates; Theo narrates**
 
 > We will sign in with the demo account. After authentication, the app loads the rooms and campus-items areas.
 
-**2. Show the catalog — Giovana**
+**2. Show the catalog — Fábio**
 
 Briefly show the room list and the **Itens do campus** tab. Point out that the sample data is illustrative, not an official inventory.
 
-**3. Book items — Giovana operates; Theo narrates**
+**3. Book items — Fábio operates; Theo narrates; Giovana explains the rule**
 
 > We will choose a future date and a time window. The app checks availability for that period, not just the total inventory.
 
-Select **Kit de canetões (4 cores)**, choose 09:00–10:00, and book 6 units. Show the booking under **Minhas reservas de itens**. To demonstrate the remaining stock for that same period, enter the same date and time in the availability form again.
+Select **Kit de canetões (4 cores)**, choose 09:00–10:00, and book 6 units. Show the booking under **Minhas reservas de itens**. Since the form resets after saving, enter the same date and time again to check the updated availability for that period.
 
 > The sample inventory has 10 units. With 6 booked for this period, the screen shows 4 available. The quantity offered by the form follows the availability shown for the selected period.
 
-**4. Edit and cancel — Giovana operates; Theo narrates**
+**4. Edit and cancel — Fábio operates; Theo narrates**
 
 Edit the booking, reduce the quantity to 5, and save. Show the updated booking in the list. Then cancel it and show that its status changes to cancelled.
 
@@ -99,32 +102,32 @@ Show only results that have actually run. If the run shown does not include the 
 
 ### 11:00–13:00 — AI use
 
-**Suggested script — Theo**
+**Suggested script — Fábio**
 
 > We used AI tools to support development and documentation. The team reviewed the suggestions, compared changes with the code, and corrected or rejected work that did not meet the project requirements.
 >
 > AI is not an integrated feature of the current product. Automatic time suggestions were left out of the MVP. Our AI usage and validation are documented in `AI_LOG.md` and `AI_LOG.pt-BR.md`.
 
-Show a concrete entry from the AI log and briefly explain what was accepted and what the team reviewed. Do not attribute decisions to the AI that the team has not confirmed.
+Show a concrete entry from the AI log and briefly explain what the team accepted and reviewed. Fábio presents the team's shared process; do not attribute individual contributions to him unless confirmed.
 
 ### 13:00–15:00 — Wrap-up
 
 **Suggested script — Theo**
 
-> The main result is a local booking flow that lets people browse resources and manage their own reservations, with rules to prevent room conflicts and item bookings from exceeding available stock.
+> The main result is a booking flow that lets people browse resources and manage their own reservations, with rules to prevent room conflicts and item bookings from exceeding available stock.
 >
-> This is still a local MVP: demo databases are independent on each computer, and there is no public hosting or official inventory integration. Our next steps are to finish validating the flow, check CI for the delivered commit, and keep the scope stable.
+> This is still an MVP without official inventory integration. Our next steps are to finish validating the flow, check CI for the delivered commit, and keep the scope stable.
 >
 > Thank you. We are ready for questions.
 
-Replace the next-steps statement with the actual project status on presentation day.
+**Adjust this information to the status on presentation day:** if hosted, say it is available at the URL and uses demo data; otherwise, say that a public URL is still outstanding.
 
 ## 5-minute instructor check-in
 
 | Time | What to show |
 |---|---|
 | 0:00–0:30 | Theo summarizes the problem, proposal, and MVP boundary. |
-| 0:30–3:00 | Giovana shows sign-in and the item-booking flow; include rooms only if verified. |
+| 0:30–3:00 | Fábio operates sign-in and item booking; Giovana explains the technical rules. Include rooms only if the flow is verified. |
 | 3:00–4:00 | Show local test results and the actual GitHub Actions status, identifying the commit. |
 | 4:00–5:00 | Theo summarizes open items, the plan to code freeze, and asks for feedback. |
 

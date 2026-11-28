@@ -1,0 +1,7 @@
+.git
+.env
+.env.*
+**/target
+backend/data
+**/*.mv.db
+**/*.trace.db

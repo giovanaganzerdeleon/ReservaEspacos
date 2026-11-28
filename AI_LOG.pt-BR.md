@@ -49,6 +49,7 @@ As entradas descrevem o trabalho assistido por IA neste repositório. O conteúd
 - **Trabalho gerado/assistido:** Simplificação dos READMEs bilíngues, criação de checklists do Dia 5 em português e inglês, atualização do roteiro e registro dos papéis da equipe.
 - **Orientações da equipe aplicadas:** Manter os briefings originais do curso intactos; identificar os status dos Dias 3 e 4 como históricos; deixar tarefas não verificadas desmarcadas; esclarecer que bancos H2 locais não sincronizam entre computadores; registrar Theo como líder da apresentação e Giovana como tech lead.
 - **Validação:** Revisão de consistência dos links e dos papéis nos documentos. Como as alterações são apenas documentais, não foram executados testes de código.
+- **Atualização da equipe:** Após confirmação do usuário, incluir Fábio na equipe de apresentação e atribuir a ele a condução da demo ao vivo e a apresentação do registro coletivo de uso de IA.
 
 ### Roteiro da apresentação baseado no código
 
@@ -57,3 +58,11 @@ As entradas descrevem o trabalho assistido por IA neste repositório. O conteúd
 - **Trabalho gerado/assistido:** Roteiro falado de 15 minutos e check-in de 5 minutos, com falas sugeridas, sequência de demonstração e preparação do ambiente.
 - **Revisão:** Conferidos o fluxo da interface, os endpoints e as regras de autenticação, reservas de sala, estoque de itens, cancelamento e pipeline. O roteiro não apresenta a IA como funcionalidade do produto nem sugere uma tentativa de excesso de estoque que a interface limita.
 - **Validação:** Revisão documental baseada no código e nos testes existentes. Nenhum código foi alterado e nenhum teste foi executado nesta etapa.
+
+### Preparação para hospedar a demonstração
+
+- **Ferramenta:** GitHub Copilot no VS Code.
+- **Resumo do prompt:** Preparar o projeto para deploy no Railway e permitir que o computador da apresentação acesse o MVP pelo navegador, sem instalar Java ou Maven.
+- **Trabalho gerado/assistido:** Adicionado perfil de hospedagem com PostgreSQL, empacotamento dos arquivos do front-end no JAR, `Dockerfile` na raiz, exclusões de arquivos locais em `.dockerignore` e guia bilíngue com instruções do Railway.
+- **Revisão e limites:** Mantidos H2 e a configuração local; credenciais são fornecidas por variáveis de ambiente; console H2 e SQL detalhado são desativados no perfil de hospedagem. A configuração serve para demo, não conclui o deploy nem garante prontidão para produção.
+- **Validação:** `.\mvnw.cmd -B package` passou com 19 testes aprovados; `.\mvnw.cmd -B checkstyle:check` passou com 0 violações. O JAR foi inspecionado e contém os arquivos estáticos, o perfil `prod` e o driver PostgreSQL. O Dockerfile usa o Maven Wrapper e compila com os testes. A conexão com PostgreSQL e o deploy não foram testados porque ainda não há serviços Railway configurados.
